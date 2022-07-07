@@ -12,6 +12,9 @@ function App() {
           <div className="password">
             <input type="text" placeholder="Mật khẩu" className="pass" />
           </div>
+          <div className="repassword">
+            <input type="text" placeholder="Xác nhận mật khẩu" className="pass" />
+          </div>
           <button type="button">Login</button>
         <div>
           <p>
