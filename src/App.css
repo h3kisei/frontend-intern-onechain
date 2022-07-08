@@ -3,7 +3,6 @@
   justify-content: center;
   display: flex;
   padding: 90px 0 90px 0;
-  background-color: beige;
 }
 
 .sub-main {
@@ -12,7 +11,11 @@
   height: 500px;
   width: 500px;
   background-color: #FFFFFF;
+  box-shadow: 7px 8px 9px 8px rgb(207, 207, 207);
+}
 
+.sub-main1 {
+  margin: auto;
 }
 
 h1 {
@@ -26,6 +29,10 @@ input {
   padding-left: 25px;
 }
 
+.username {
+  margin-top: 20px;
+}
+
 .password {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -37,4 +44,6 @@ button {
   height: 50px;
   width: 400px;
   color: white;
+  border: none;
+  margin-top: 30px;
 }

@@ -1,26 +1,19 @@
 import './App.css';
+import { Route, Routes } from "react-router-dom";
+import LoginPage from './pages/LoginPage'
+import SignUp from './pages/SignUp'
+import List from './pages/List'
 
 function App() {
   return (
-    <div className="main">
-      <div className="sub-main">
-        <div>
-          <h1>Login Page</h1>
-          <div>
-            <input type="text" placeholder="Tên đăng nhập" className="username" />
-          </div>
-          <div className="password">
-            <input type="text" placeholder="Mật khẩu" className="pass" />
-          </div>
-          <button type="button">Login</button>
-        <div>
-          <p>
-            <a href="#">Forgot Password?</a>
-          </p>
+        <div className="App">
+        <Routes>
+          <Route path="/" element={(<div>Hello</div>)} />
+          <Route path="/loginpage" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/list" element={<List />} />
+        </Routes>
         </div>
-      </div>
-    </div>
-    </div>
   );
 }
 
