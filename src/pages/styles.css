@@ -1,0 +1,65 @@
+.login-main {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 90px 0 90px 0;
+    background: url("../image/bg1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+  }
+  
+  .signup-main {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 90px 0 90px 0;
+    background: url("../image/bg2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .sub-main {
+    display: flex;
+    border-radius: 10px;
+    height: 500px;
+    width: 500px;
+    background-color: #FFFFFF;
+  }
+  
+  .sub-main1 {
+    margin: auto;
+  }
+  
+  h1 {
+    text-align: center;
+    font-weight: 700;
+  }
+  
+  input {
+    height: 50px;
+    width: 400px;
+    border-radius: 5px;
+    padding-left: 25px;
+  }
+  
+  .username {
+    margin-top: 20px;
+  }
+  
+  .password {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  button {
+    background-color: blue;
+    border-radius: 5px;
+    height: 50px;
+    width: 400px;
+    color: white;
+    border: none;
+    margin-top: 30px;
+  }
+  

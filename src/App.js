@@ -1,8 +1,9 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import LoginPage from './pages/LoginPage'
-import SignUp from './pages/SignUp'
-import List from './pages/List'
+import LoginPage from './pages/LoginPage.jsx';
+import SignUp from './pages/SignUp';
+import List from './pages/List';
+// import firebaseConnect from './firebaseConnect';
 
 function App() {
   return (
