@@ -5,7 +5,7 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../contexts/AuthContext"
 // import validate from '/utils/validateInfo';
 
-export default function Login() {
+export default function LoginPage() {
 	const usernameRef = useRef()
 	const passwordRef = useRef()
 	const { login } = useAuth()
