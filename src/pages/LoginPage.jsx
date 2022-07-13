@@ -1,37 +1,59 @@
+import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
+import { NavLink, useHistory } from 'react-router-dom';
 import './styles.css';
-import { Link } from 'react-router-dom';
-import background1 from '../image/bg1.jpg';
+import React, { useRef, useState } from "react";
+import { useAuth } from "../contexts/AuthContext"
 // import validate from '/utils/validateInfo';
 
-function App() {
+export default function Login() {
+	const usernameRef = useRef()
+	const passwordRef = useRef()
+	const { login } = useAuth()
+	const [error, setError] = useState("")
+	const [loading, setLoading] = useState(false)
+	const history = useHistory()
+  
+	async function handleSubmit(e) {
+	  e.preventDefault()
+  
+	  try {
+		setError("")
+		setLoading(true)
+		await login(usernameRef.current.value, passwordRef.current.value)
+		history.push("/")
+	  } catch {
+		setError("Failed to log in")
+	  }
+  
+	  setLoading(false)
+	}
   return (
     <div className="login-main">
       <div className="sub-main">
         <div className="sub-main1">
-          <h1>Login Page</h1>
-          <div>
-            <input 
-            type="text" 
-            placeholder="Tên đăng nhập" 
-            className="username"></input>
-          </div>
-          <div className="password">
-            <input type="text" placeholder="Mật khẩu" className="password" />
-          </div>
-          <div>
-            <p>
-              <Link to='/signup'>Forgot Password?</Link>
-            </p>
-          </div>
-          <button type="button">Đăng nhập</button>
-          <div>
-            <p>
-              <Link to='/signup'>Chưa có tài khoản?</Link>
-            </p>
-          </div>
+        <Text fontSize='4xl' as='b'>Login Page</Text>
+		{error && <Alert variant="danger">{error}</Alert>}
+		<div onSubmit={handleSubmit}>
+          <Input placeholder='Username' mt='40px' type="username" ref={usernameRef} required />
+		
+			<InputGroup size='md'>
+				<Input
+				mt='20px'
+				mb='20px'
+				pr='4.5rem'
+				type={'text', 'password'}
+				placeholder='Enter password'
+				ref={passwordRef} required
+				/>
+			</InputGroup>     
+		  <Flex justify="flex-end">
+              <NavLink to='/signup'><Text color='blue'>Forgot Password?</Text></NavLink>
+		  </Flex>
+              <Button colorScheme='blue' mt='20px' mb='20px' width="100%" disabled={loading} type="submit">Login</Button>
+              <NavLink to='/signup'><Text color='blue'>Already haven't a account?</Text></NavLink>
+			</div>
+</div>
       </div>
-    </div>
-    {/* <img src={background1} alt="background1" className="background1" /> */}
     </div>
   );
 }

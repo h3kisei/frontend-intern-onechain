@@ -32,34 +32,3 @@
     margin: auto;
   }
   
-  h1 {
-    text-align: center;
-    font-weight: 700;
-  }
-  
-  input {
-    height: 50px;
-    width: 400px;
-    border-radius: 5px;
-    padding-left: 25px;
-  }
-  
-  .username {
-    margin-top: 20px;
-  }
-  
-  .password {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  
-  button {
-    background-color: blue;
-    border-radius: 5px;
-    height: 50px;
-    width: 400px;
-    color: white;
-    border: none;
-    margin-top: 30px;
-  }
-  
