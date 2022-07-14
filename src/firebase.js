@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"
+import "firebase/auth";
 
-const firebaseConfig = {
+const firebaseConfig ={
   apiKey: "AIzaSyAtSP4JttiDP3-lySVi9z1AQAho6TRVpEM",
   authDomain: "ochain-d79c3.firebaseapp.com",
   projectId: "ochain-d79c3",
@@ -11,5 +11,5 @@ const firebaseConfig = {
   measurementId: "G-FBMY3SL638"
 };
 
-export const auth = getAuth(app)
+export const auth = app.auth()
 const app = initializeApp(firebaseConfig);

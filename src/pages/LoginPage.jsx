@@ -1,8 +1,8 @@
-import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Button, Flex, Input, InputGroup, Text, Alert } from '@chakra-ui/react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './styles.css';
 import React, { useRef, useState } from "react";
-import { useAuth } from "../contexts/AuthContext"
+import { useAuth } from "../contexts/AuthContext.js"
 // import validate from '/utils/validateInfo';
 
 export default function LoginPage() {
@@ -11,8 +11,8 @@ export default function LoginPage() {
 	const { login } = useAuth()
 	const [error, setError] = useState("")
 	const [loading, setLoading] = useState(false)
-	const history = useHistory()
-  
+	const navigate = useNavigate()
+
 	async function handleSubmit(e) {
 	  e.preventDefault()
   
@@ -20,7 +20,7 @@ export default function LoginPage() {
 		setError("")
 		setLoading(true)
 		await login(usernameRef.current.value, passwordRef.current.value)
-		history.push("/")
+		navigate("/")
 	  } catch {
 		setError("Failed to log in")
 	  }
@@ -58,4 +58,3 @@ export default function LoginPage() {
   );
 }
 
-export default LoginPage;

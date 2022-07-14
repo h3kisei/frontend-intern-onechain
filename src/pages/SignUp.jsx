@@ -1,8 +1,8 @@
-import { Input, InputGroup, Text, Button, Flex } from '@chakra-ui/react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { Input, InputGroup, Text, Button, Flex, Alert } from '@chakra-ui/react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './styles.css';
 import React, { useRef, useState } from "react"
-import { useAuth } from "../contexts/AuthContext"
+import { useAuth } from "../contexts/AuthContext.js"
 
 export default function Signup() {
   const usernameRef = useRef()
@@ -11,7 +11,7 @@ export default function Signup() {
   const { signup } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const history = useHistory()
+  const navigate = useNavigate()
   
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
@@ -22,7 +22,7 @@ export default function Signup() {
       setError("")
       setLoading(true)
       await signup(usernameRef.current.value, passwordRef.current.value)
-      history.push("/")
+      navigate("/")
     } catch {
       setError("Failed to create an account")
     }
@@ -66,5 +66,3 @@ export default function Signup() {
     </div>
   );
 
-
-export default Signup;

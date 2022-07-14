@@ -4,7 +4,7 @@ import LoginPage from './pages/LoginPage.jsx';
 import SignUp from './pages/SignUp';
 import ListChakra from './pages/ListChakra';
 import { ChakraProvider } from '@chakra-ui/react'
-import { AuthProvider } from "../contexts/AuthContext"
+import { AuthProvider } from "./contexts/AuthContext.js"
 
 
 function App() {
