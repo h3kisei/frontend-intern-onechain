@@ -12,9 +12,7 @@ export default function Signup() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
-
-  async function handleSubmit(e) {
-    e.preventDefault()
+  
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
@@ -67,6 +65,6 @@ export default function Signup() {
       </div>
     </div>
   );
-}
 
-export default App;
+
+export default Signup;

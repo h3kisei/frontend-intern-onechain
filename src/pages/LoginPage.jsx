@@ -58,4 +58,4 @@ export default function LoginPage() {
   );
 }
 
-export default App;
+export default LoginPage;
