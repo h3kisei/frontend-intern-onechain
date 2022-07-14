@@ -13,5 +13,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_OCHAIN_D79C3 }}'
-          projectId: ochain-d79c3
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ONECHAIN_FD700 }}'
+          projectId: onechain-fd700

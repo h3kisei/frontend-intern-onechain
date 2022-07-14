@@ -1,44 +1,37 @@
-import { Input, InputGroup, Text, Button, Flex, Alert } from '@chakra-ui/react';
+import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, useNavigate } from 'react-router-dom';
+import { auth, registerWithEmailAndPassword } from "../firebase";
 import './styles.css';
-import React, { useRef, useState } from "react"
-import { useAuth } from "../contexts/AuthContext.js"
+// import validate from '/utils/validateInfo';
 
-export default function Signup() {
-  const usernameRef = useRef()
-  const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
-  const { signup } = useAuth()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
-  
-  async function handleSubmit(e) {
-    e.preventDefault()
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match")
+function Signup() {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+	const [user, loading, error] = useAuthState(auth);
+	const navigate = useNavigate();
+  const register = () => {
+    if (password !== passwordConfirm) {
+      alert("Password do not match")
+      return;
     }
+    registerWithEmailAndPassword(email, password);
+  };
+  useEffect(() => {
+    if (loading) return;
+    if (user) navigate('/signup', { replace: true });
+  }, [user, loading]);
 
-    try {
-      setError("")
-      setLoading(true)
-      await signup(usernameRef.current.value, passwordRef.current.value)
-      navigate("/")
-    } catch {
-      setError("Failed to create an account")
-    }
-
-    setLoading(false)
-  }
   return (
     <div className="signup-main">
       <div className="sub-main">
         <div className="sub-main1">
         <Text fontSize='4xl' as='b'>Sign Up</Text>
-        {error && <Alert variant="danger">{error}</Alert>}
-        <div onSubmit={handleSubmit}>
-          <Input placeholder='Username' mt='40px' type="username" ref={usernameRef} required />
+		    <div>
+        <Input placeholder='Email' mt='40px' type="email" onChange={(e) => setEmail(e.target.value)} />
+		
 			<InputGroup size='md'>
 				<Input
 				mt='20px'
@@ -46,25 +39,29 @@ export default function Signup() {
 				pr='4.5rem'
 				type={'password'}
 				placeholder='Enter password'
-        ref={passwordRef} required
+				onChange={(e) => setPassword(e.target.value)}
 				/>
-			</InputGroup>
+			</InputGroup>     
       <InputGroup size='md'>
 				<Input
 				mb='20px'
 				pr='4.5rem'
 				type={'password'}
 				placeholder=' Re enter password'
-        ref={passwordConfirmRef} required
+        onChange={(e) => setPasswordConfirm(e.target.value)}
 				/>
 			</InputGroup>
-          <Button colorScheme='blue' mt='20px' mb='20px' width='100%' disabled={loading} type="submit">Signup</Button>
+      <NavLink to='/info'>
+          <Button colorScheme='blue' mt='20px' mb='20px' width='100%' onClick={register}>Signup</Button>
+      </NavLink>
           </div>
           <Flex justify="flex-end">
               <NavLink to='/loginpage'><Text color='blue'>Already have a account?</Text></NavLink>
 		  </Flex>
+			</div>
 </div>
       </div>
-    </div>
   );
   }
+
+export default Signup;

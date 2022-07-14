@@ -1,40 +1,30 @@
-import { Button, Flex, Input, InputGroup, Text, Alert } from '@chakra-ui/react';
+import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, useNavigate } from 'react-router-dom';
+import { auth, logInWithEmailAndPassword } from "../firebase";
 import './styles.css';
-import React, { useRef, useState } from "react";
-import { useAuth } from "../contexts/AuthContext.js"
 // import validate from '/utils/validateInfo';
 
-export default function LoginPage() {
-	const usernameRef = useRef()
-	const passwordRef = useRef()
-	const { login } = useAuth()
-	const [error, setError] = useState("")
-	const [loading, setLoading] = useState(false)
-	const navigate = useNavigate()
+function LoginPage() {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [user, loading, error] = useAuthState(auth);
+	const navigate = useNavigate();
 
-	async function handleSubmit(e) {
-	  e.preventDefault()
-  
-	  try {
-		setError("")
-		setLoading(true)
-		await login(usernameRef.current.value, passwordRef.current.value)
-		navigate("/")
-	  } catch {
-		setError("Failed to log in")
-	  }
-  
-	  setLoading(false)
-	}
+	useEffect(() => {
+		if(loading) {
+			return;
+		}
+		if(user) navigate("/loginpage");
+	}, [user, loading]);
   return (
     <div className="login-main">
       <div className="sub-main">
         <div className="sub-main1">
         <Text fontSize='4xl' as='b'>Login Page</Text>
-		{error && <Alert variant="danger">{error}</Alert>}
-		<div onSubmit={handleSubmit}>
-          <Input placeholder='Username' mt='40px' type="username" ref={usernameRef} required />
+		<div>
+          <Input placeholder='Email' mt='40px' type="email" onChange={(e) => setEmail(e.target.value)} />
 		
 			<InputGroup size='md'>
 				<Input
@@ -43,18 +33,20 @@ export default function LoginPage() {
 				pr='4.5rem'
 				type={'password'}
 				placeholder='Enter password'
-				ref={passwordRef} required
+				onChange={(e) => setPassword(e.target.value)}
 				/>
 			</InputGroup>     
 		  <Flex justify="flex-end">
               <NavLink to='/signup'><Text color='blue'>Forgot Password?</Text></NavLink>
 		  </Flex>
-              <Button colorScheme='blue' mt='20px' mb='20px' width="100%" disabled={loading} type="submit">Login</Button>
+              <Button colorScheme='blue' mt='20px' mb='20px' width="100%" onClick={() => logInWithEmailAndPassword(email, password)} >Login</Button>
               <NavLink to='/signup'><Text color='blue'>Already haven't a account?</Text></NavLink>
 			</div>
 </div>
       </div>
     </div>
   );
-}
+  }
+
+export default LoginPage;
 
