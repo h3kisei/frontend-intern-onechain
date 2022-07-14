@@ -13,6 +13,8 @@ export default function Signup() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   
+  async function handleSubmit(e) {
+    e.preventDefault()
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords do not match")
@@ -42,7 +44,7 @@ export default function Signup() {
 				mt='20px'
 				mb='20px'
 				pr='4.5rem'
-				type={'text', 'password'}
+				type={'password'}
 				placeholder='Enter password'
         ref={passwordRef} required
 				/>
@@ -51,7 +53,7 @@ export default function Signup() {
 				<Input
 				mb='20px'
 				pr='4.5rem'
-				type={'text', 'password'}
+				type={'password'}
 				placeholder=' Re enter password'
         ref={passwordConfirmRef} required
 				/>
@@ -65,4 +67,4 @@ export default function Signup() {
       </div>
     </div>
   );
-
+  }

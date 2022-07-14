@@ -12,14 +12,15 @@ function App() {
 	
     <ChakraProvider>
         <div className="App">
-        <Routes>
 		<AuthProvider>
+        <Routes>
+		
           <Route path="/" element={(<div>Hello</div>)} />
           <Route path="/loginpage" element={<LoginPage />} />
           <Route path="/signup" element={<SignUp />} />
 		  <Route path="/list-chakra" element={<ListChakra />} />
-		</AuthProvider>
         </Routes>
+		</AuthProvider>
         </div>
     </ChakraProvider>
   );

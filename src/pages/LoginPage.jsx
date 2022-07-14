@@ -41,7 +41,7 @@ export default function LoginPage() {
 				mt='20px'
 				mb='20px'
 				pr='4.5rem'
-				type={'text', 'password'}
+				type={'password'}
 				placeholder='Enter password'
 				ref={passwordRef} required
 				/>
