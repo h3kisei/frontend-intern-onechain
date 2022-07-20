@@ -77,8 +77,8 @@ const getDataFromFirebase = async (collectionName) => {
   return data;
 };
 
-const removeDataFromFirebase = async (collectionName) => {
-  await deleteDoc(doc(db, collectionName));
+const removeDataFromFirebase = async (id) => {
+  await deleteDoc(doc(db, "sinhvien", id));
 };
 
 const updateData = async (name, sex, age, level, id) => {

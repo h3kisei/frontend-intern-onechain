@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Header from "../components/Header.jsx";
 import ModalInfo from "../components/Modal.jsx";
 import UpdateInfo from "../components/UpdateInfo.jsx"
-import { getDataFromFirebase } from "../firebase";
+import { getDataFromFirebase, removeDataFromFirebase } from "../firebase";
 
 function List() {
     const [sinhvien, setSinhvien] = useState([])
@@ -90,6 +90,8 @@ function List() {
                 colorScheme='teal'
                 aria-label='Delete'
                 icon={<DeleteIcon />}
+                id={student.id}
+                onClick={() => removeDataFromFirebase(id)}
                 />
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
             </Box>
