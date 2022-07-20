@@ -13,7 +13,7 @@ import {
   setDoc,
   getDocs,
   deleteDoc,
-  updateDoc,
+  getDoc,
 } from "firebase/firestore";
 
 const firebaseConfig ={
@@ -82,7 +82,7 @@ const removeDataFromFirebase = async (collectionName) => {
 };
 
 const updateData = async (name, sex, age, level, id) => {
-  await getDocs(collection(db, "sinhvien", id), {
+  await getDoc(doc(db, "sinhvien", id), {
     name,
     sex,
     age,

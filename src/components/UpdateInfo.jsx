@@ -49,7 +49,7 @@ import { updateData } from "../firebase";
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={() => updateData(name, sex, age, level, id)}>
+                <Button colorScheme='blue' mr={3} onClick={() => updateData(name, sex, age, level, id), onClose}>
                   Update
                 </Button>
               </ModalFooter>
