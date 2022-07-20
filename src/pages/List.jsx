@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import Header from "../components/Header.jsx";
 import ModalInfo from "../components/Modal.jsx";
 import UpdateInfo from "../components/UpdateInfo.jsx"
-import { getDataFromFirebase, removeDataFromFirebase } from "../firebase";
+import DeleteInfo from "../components/DeleteInfo.jsx"
+import { getDataFromFirebase } from "../firebase";
 
 function List() {
     const [sinhvien, setSinhvien] = useState([])
@@ -84,15 +85,8 @@ function List() {
 
         <Box display='flex' mt='2' alignItems='center' justifyContent='center'>
         <ModalInfo name={student.name} />
-        <UpdateInfo id={student.id}/>
-                <IconButton
-                variant='outline'
-                colorScheme='teal'
-                aria-label='Delete'
-                icon={<DeleteIcon />}
-                id={student.id}
-                onClick={() => removeDataFromFirebase(id)}
-                />
+        <UpdateInfo student={student} />
+        <DeleteInfo student={student} />
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
             </Box>
         </Box>

@@ -7,13 +7,19 @@ import {
 import React, { useState } from "react";
 import { updateData } from "../firebase";
   
-  function UpdateInfo({ id }) {
+function UpdateInfo({ student }) {
+        const { name: propName, sex: propSex, age: propAge, level: propLevel, id } = student;
         const { isOpen, onOpen, onClose } = useDisclosure();
-        const [name, setName] = useState("");
-        const [sex, setSex] = useState("");
-        const [age, setAge] = useState("");
-        const [level, setLevel] = useState("");
+        const [name, setName] = useState(propName);
+        const [sex, setSex] = useState(propSex);
+        const [age, setAge] = useState(propAge);
+        const [level, setLevel] = useState(propLevel);
     
+        const handleUpdateInfo = () => {
+            updateData(name, sex, age, level, id).then(() => {
+              onClose();
+            });
+          }
       return (
         <>
         <IconButton
@@ -49,7 +55,7 @@ import { updateData } from "../firebase";
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button colorScheme='blue' mr={3} onClick={() => updateData(name, sex, age, level, id), onClose}>
+                <Button colorScheme='blue' mr={3} onClick={handleUpdateInfo}>
                   Update
                 </Button>
               </ModalFooter>

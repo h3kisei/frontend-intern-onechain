@@ -82,7 +82,7 @@ const removeDataFromFirebase = async (id) => {
 };
 
 const updateData = async (name, sex, age, level, id) => {
-  await getDoc(doc(db, "sinhvien", id), {
+  await setDoc(doc(db, "sinhvien", id), {
     name,
     sex,
     age,
