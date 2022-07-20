@@ -1,23 +1,20 @@
-import { DeleteIcon, EditIcon, InfoIcon } from '@chakra-ui/icons';
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
 import { Badge, Box, Button, Flex, IconButton } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import Header from "../components/Header.jsx";
-import { db } from "../firebase";
-
+import ModalInfo from "../components/Modal.jsx";
+import { getDataFromFirebase } from "../firebase";
 
 function List() {
     const [sinhvien, setSinhvien] = useState([])
-    const fetchSinhvien = async()=>{
-        const response = db.collection('Blogs');
-        const data = await response.get();
-        data.docs.forEach(item=>{
-         setBlogs([...blogs,item.data()])
+    useEffect(() => {
+        getDataFromFirebase('sinhvien').then(results => {
+            setSinhvien(results);
+            console.log(results);
         })
-      }
-      useEffect(() => {
-        fetchBlogs();
-      }, [])
+
+      }, []);
 
     return (
         <div>
@@ -29,54 +26,54 @@ function List() {
         </Link>
         </Flex>
         <div>
-        {
-            sinhvien && sinhvien.map(sv => {
-                return(
-                    <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' m='20px'>
-        <Box p='6'>
-        <Box display='flex' alignItems='baseline'>
-            <Badge borderRadius='full' px='2' colorScheme='teal'>
-            New
-            </Badge>
+        {sinhvien.length > 0 && sinhvien.map(student => (
+            <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden' m='20px' key={student.id}>
+            <Box p='6'>
+
             <Box
-            color='gray.500'
-            fontWeight='semibold'
-            letterSpacing='wide'
-            fontSize='xs'
-            textTransform='uppercase'
-            ml='2'
+                display='flex' justifyContent='center'
+                mt='1'
+                fontWeight='semibold'
+                as='h4'
+                lineHeight='tight'
+                noOfLines={1}
             >
-            {sv.name}
+                <div>{student.name}</div>
             </Box>
-        </Box>
 
-        <Box
-            mt='1'
-            fontWeight='semibold'
-            as='h4'
-            lineHeight='tight'
-            noOfLines={1}
-        >
-            {sv.sex}
-        </Box>
-
-        <Box>
-            {sv.age}
-            <Box as='span' color='gray.600' fontSize='sm'>
-            / wk
+            <Box display='flex' alignItems='baseline'>
+                <Badge borderRadius='full' px='2' colorScheme='teal' key={student.id}>
+                <div>{student.sex}</div>
+                </Badge>
+                    <Box
+                        color='gray.500'
+                        fontWeight='semibold'
+                        letterSpacing='wide'
+                        fontSize='xs'
+                        textTransform='uppercase'
+                        ml='2'
+                    >
+                        <div>{student.age}</div>
+                    </Box>
+                
             </Box>
+        <Box display='flex' alignItems='baseline'>
+
+            <Box
+                color='gray.500'
+                fontWeight='semibold'
+                letterSpacing='wide'
+                fontSize='xs'
+                textTransform='uppercase'
+                ml='2'
+            >
+                <div>{student.level}</div>
+            </Box>
+            
         </Box>
 
         <Box display='flex' mt='2' alignItems='center' justifyContent='center'>
-        <Link to='/info' mt='20px'>
-                <IconButton
-                mr='20px'
-                variant='outline'
-                colorScheme='teal'
-                aria-label='Info'
-                icon={<InfoIcon />}
-                />
-        </Link>
+        <ModalInfo name={student.name} />
                 <IconButton
                 mr='20px'
                 variant='outline'
@@ -95,9 +92,7 @@ function List() {
         </Box>
         </Box>
     </Box>
-                )
-            })
-        }
+            ))}
         </div>
     </div>
     </div>

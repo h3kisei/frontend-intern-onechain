@@ -1,37 +1,22 @@
-import { Button, Input, Text, NumberInput, 
-	NumberInputField, NumberInputStepper, NumberIncrementStepper,
-	Select, NumberDecrementStepper, Flex
- } from '@chakra-ui/react';
-import React, { useEffect, useState } from "react";
+import {
+	Button, Flex, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput,
+	NumberInputField, NumberInputStepper, Select, Text
+} from '@chakra-ui/react';
+import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth, profile } from "../firebase";
 import './styles.css';
-import { doc, getDoc } from "firebase/firestore";
-
-const docRef = doc(db, "cities", "SF");
-const docSnap = await getDoc(docRef);
-
-if (docSnap.exists()) {
-  console.log("Document data:", docSnap.data());
-} else {
-  // doc.data() will be undefined in this case
-  console.log("No such document!");
-}
-
 
 function Info() {
 	const [name, setName] = useState("");
-	const [sex] = useState("");
-	const [age] = useState("");
+	const [sex, setSex] = useState("");
+	const [age, setAge] = useState("");
 	const [level, setLevel] = useState("");
 	const [user, loading, error] = useAuthState(auth);
 
 	const navigate = useNavigate();
-	const profile = () => {
-		if (!name) alert("Please enter name");
-    	profile(name, sex, age, level);
 
-	};
   return (
     <div className="login-main">
       <div className="sub-main">
@@ -40,13 +25,13 @@ function Info() {
 		<div>
           <Input placeholder='Fullname' mt='40px' type="text" onChange={(e) => setName(e.target.value)} />
 		  <Flex flex-direction='row' mt='20px'>
-		  <Select placeholder='Sex' mr='20px'>
-			<option value='option1'>Nam</option>
-			<option value='option2'>Nữ</option>
+		  <Select placeholder='Sex' mr='20px' onChange={(e) => setSex(e.target.value)}>
+			<option value='Male'>Nam</option>
+			<option value='Female'>Nữ</option>
 			</Select>
-			<NumberInput placeholder='Age' maxW={20} defaultValue={15} min={10}>
+			<NumberInput placeholder='Age' maxW={20} defaultValue={15} min={10} onChange={(valueAsString, valueAsNumber) => setAge(valueAsNumber)} >
 				<NumberInputField />
-				<NumberInputStepper>
+				<NumberInputStepper >
 				<NumberIncrementStepper />
 				<NumberDecrementStepper />
 				</NumberInputStepper>

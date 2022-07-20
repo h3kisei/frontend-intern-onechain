@@ -18,13 +18,13 @@ function Signup() {
       return;
     }
     registerWithEmailAndPassword(email, password).then((res) => {
-      navigate('/info');
+      navigate('/loginpage');
     }).catch(error => console.log(error));
 
   };
-  // useEffect(() => {
-  //   if (loading) return;
-  // }, [user, loading]);
+  useEffect(() => {
+    if (loading) return;
+  }, [user, loading]);
 
   return (
     <div className="signup-main">

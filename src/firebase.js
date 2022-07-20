@@ -4,13 +4,14 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  getAdditionalUserInfo,
 } from "firebase/auth";
 import {
   getFirestore,
   collection,
   addDoc,
   doc,
+  setDoc,
+  getDocs,
 } from "firebase/firestore";
 
 const firebaseConfig ={
@@ -52,21 +53,26 @@ const registerWithEmailAndPassword = async (email, password) => {
 };
 
 const profile = async (name, sex, age, level) => {
-  try {
-    const res = await getAdditionalUserInfo(auth, name, age, sex, level);
-    const sv = res.sv;
-    await addDoc(collection(db, "sinhvien"), {
-      uid: sv.uid,
-      authProvider: "local",
-      name,
-      sex,
-      age,
-      level,
-    });
-    localStorage.setItem('sv', sv);
-  } catch (err) {
-    console.error(err);
-  }
+  await setDoc(doc(db, "sinhvien", "sinhvien_1"), {
+    name,
+    sex,
+    age,
+    level,
+  });
+};
+
+const getDataFromFirebase = async (collectionName) => {
+  const res = await getDocs(collection(db, collectionName));
+  const data = []
+  res.forEach(r => {
+    data.push(
+      {
+        id: r.id,
+        ...r.data(),
+      }
+    ) 
+  })
+  return data;
 };
 
 const logout = () => {
@@ -80,5 +86,5 @@ export {
   registerWithEmailAndPassword,
   logout,
   profile,
-
-
+  getDataFromFirebase,
+}
