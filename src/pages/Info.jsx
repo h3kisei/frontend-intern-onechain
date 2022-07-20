@@ -3,9 +3,8 @@ import {
 	NumberInputField, NumberInputStepper, Select, Text
 } from '@chakra-ui/react';
 import React, { useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from 'react-router-dom';
-import { auth, profile } from "../firebase";
+import { profile } from "../firebase";
 import './styles.css';
 
 function Info() {
@@ -13,7 +12,6 @@ function Info() {
 	const [sex, setSex] = useState("");
 	const [age, setAge] = useState("");
 	const [level, setLevel] = useState("");
-	const [user, loading, error] = useAuthState(auth);
 
 	const navigate = useNavigate();
 

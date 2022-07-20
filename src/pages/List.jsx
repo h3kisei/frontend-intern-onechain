@@ -1,19 +1,20 @@
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons';
-import { Badge, Box, Button, Flex, IconButton } from "@chakra-ui/react";
+import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
+import { Badge, Box, Button, Flex, IconButton, Input } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import Header from "../components/Header.jsx";
 import ModalInfo from "../components/Modal.jsx";
+import UpdateInfo from "../components/UpdateInfo.jsx"
 import { getDataFromFirebase } from "../firebase";
 
 function List() {
     const [sinhvien, setSinhvien] = useState([])
+
     useEffect(() => {
         getDataFromFirebase('sinhvien').then(results => {
             setSinhvien(results);
             console.log(results);
         })
-
       }, []);
 
     return (
@@ -24,6 +25,15 @@ function List() {
         <Link to='/info'>
         <Button colorScheme='blue' width="120px">Add Student</Button>
         </Link>
+        </Flex>
+        <Flex mt='30px' mb='30px' justifyContent='flex-end' width='30%'>
+            <Input placeholder='Search' />
+            <IconButton
+                ml='10px'
+                colorScheme='blue'
+                aria-label='Search database'
+                icon={<SearchIcon />}
+                />
         </Flex>
         <div>
         {sinhvien.length > 0 && sinhvien.map(student => (
@@ -74,13 +84,7 @@ function List() {
 
         <Box display='flex' mt='2' alignItems='center' justifyContent='center'>
         <ModalInfo name={student.name} />
-                <IconButton
-                mr='20px'
-                variant='outline'
-                colorScheme='teal'
-                aria-label='Edit'
-                icon={<EditIcon />}
-                />
+        <UpdateInfo id={student.id}/>
                 <IconButton
                 variant='outline'
                 colorScheme='teal'

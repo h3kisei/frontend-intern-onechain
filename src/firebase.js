@@ -12,6 +12,8 @@ import {
   doc,
   setDoc,
   getDocs,
+  deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 const firebaseConfig ={
@@ -53,7 +55,7 @@ const registerWithEmailAndPassword = async (email, password) => {
 };
 
 const profile = async (name, sex, age, level) => {
-  await setDoc(doc(db, "sinhvien", "sinhvien_1"), {
+  await setDoc(doc(db, "sinhvien"), {
     name,
     sex,
     age,
@@ -75,6 +77,19 @@ const getDataFromFirebase = async (collectionName) => {
   return data;
 };
 
+const removeDataFromFirebase = async (collectionName) => {
+  await deleteDoc(doc(db, collectionName));
+};
+
+const updateData = async (name, sex, age, level, id) => {
+  await getDocs(collection(db, "sinhvien", id), {
+    name,
+    sex,
+    age,
+    level,
+  });
+};
+
 const logout = () => {
   signOut(auth);
 };
@@ -87,4 +102,6 @@ export {
   logout,
   profile,
   getDataFromFirebase,
+  removeDataFromFirebase,
+  updateData,
 }
