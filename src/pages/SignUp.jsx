@@ -1,7 +1,7 @@
 import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { auth, registerWithEmailAndPassword } from "../firebase";
 import './styles.css';
 // import validate from '/utils/validateInfo';
@@ -17,12 +17,14 @@ function Signup() {
       alert("Password do not match")
       return;
     }
-    registerWithEmailAndPassword(email, password);
+    registerWithEmailAndPassword(email, password).then((res) => {
+      navigate('/info');
+    }).catch(error => console.log(error));
+
   };
-  useEffect(() => {
-    if (loading) return;
-    if (user) navigate('/signup', { replace: true });
-  }, [user, loading]);
+  // useEffect(() => {
+  //   if (loading) return;
+  // }, [user, loading]);
 
   return (
     <div className="signup-main">
@@ -51,12 +53,10 @@ function Signup() {
         onChange={(e) => setPasswordConfirm(e.target.value)}
 				/>
 			</InputGroup>
-      <NavLink to='/info'>
           <Button colorScheme='blue' mt='20px' mb='20px' width='100%' onClick={register}>Signup</Button>
-      </NavLink>
           </div>
           <Flex justify="flex-end">
-              <NavLink to='/loginpage'><Text color='blue'>Already have a account?</Text></NavLink>
+              <NavLink to='/info'><Text color='blue'>Already have a account?</Text></NavLink>
 		  </Flex>
 			</div>
 </div>

@@ -1,7 +1,7 @@
 import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { auth, logInWithEmailAndPassword } from "../firebase";
 import './styles.css';
 // import validate from '/utils/validateInfo';
@@ -39,8 +39,10 @@ function LoginPage() {
 		  <Flex justify="flex-end">
               <NavLink to='/signup'><Text color='blue'>Forgot Password?</Text></NavLink>
 		  </Flex>
+		  <Link to='/list'>
               <Button colorScheme='blue' mt='20px' mb='20px' width="100%" onClick={() => logInWithEmailAndPassword(email, password)} >Login</Button>
-              <NavLink to='/signup'><Text color='blue'>Already haven't a account?</Text></NavLink>
+			</Link>
+			  <NavLink to='/signup'><Text color='blue'>Already haven't a account?</Text></NavLink>
 			</div>
 </div>
       </div>

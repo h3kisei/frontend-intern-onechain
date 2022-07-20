@@ -4,12 +4,13 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  createInfo,
+  getAdditionalUserInfo,
 } from "firebase/auth";
 import {
   getFirestore,
   collection,
   addDoc,
+  doc,
 } from "firebase/firestore";
 
 const firebaseConfig ={
@@ -44,29 +45,29 @@ const registerWithEmailAndPassword = async (email, password) => {
       authProvider: "local",
       email,
     });
+    localStorage.setItem('user', user);
   } catch (err) {
     console.error(err);
-    alert(err.message);
   }
 };
 
-const info = async (name, sex, age, class) => {
+const profile = async (name, sex, age, level) => {
   try {
-    const res = await createInfo(auth, email, password);
-    const user = res.user;
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
+    const res = await getAdditionalUserInfo(auth, name, age, sex, level);
+    const sv = res.sv;
+    await addDoc(collection(db, "sinhvien"), {
+      uid: sv.uid,
+      authProvider: "local",
       name,
       sex,
       age,
-      class,
-      authProvider: "local",    
+      level,
     });
+    localStorage.setItem('sv', sv);
   } catch (err) {
     console.error(err);
-    alert(err.message);
   }
-}; 
+};
 
 const logout = () => {
   signOut(auth);
@@ -78,5 +79,6 @@ export {
   logInWithEmailAndPassword,
   registerWithEmailAndPassword,
   logout,
-};
+  profile,
+
 
