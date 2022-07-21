@@ -59,3 +59,8 @@
     flex-wrap: wrap;
     margin-left: 40px;
   }
+
+  .err {
+    display: inline;
+    color: red;
+  }

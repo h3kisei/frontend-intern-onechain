@@ -1,7 +1,7 @@
 import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { NavLink, useNavigate, Link } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { auth, registerWithEmailAndPassword } from "../firebase";
 import './styles.css';
 // import validate from '/utils/validateInfo';

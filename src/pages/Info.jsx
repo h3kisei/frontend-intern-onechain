@@ -16,6 +16,12 @@ function Info() {
 	const [describe, setDescribe] = useState("");
 	const navigate = useNavigate();
 
+	const info = () => {
+		profile(name, sex, age, level, describe).then(() => {
+		  navigate('/list');
+		}).catch(error => console.log(error));
+	  };
+
   return (
     <div className="info-main">
       <div className="sub-main">
@@ -39,7 +45,7 @@ function Info() {
 		  <Input placeholder='Level' mt='20px' type="text" onChange={(e) => setLevel(e.target.value)} />
 		  <Input placeholder='Describe' mt='20px' onChange={(e) => setDescribe(e.target.value)} />
 		  <Link to='/list'>    
-        <Button colorScheme='blue' mt='20px' mb='20px' width="100%" onClick={() => profile(name, sex, age, level, describe)} >Add Info</Button>
+        <Button colorScheme='blue' mt='20px' mb='20px' width="100%" onClick={ info } >Add Info</Button>
 		</Link>
 		</div>
 </div>
