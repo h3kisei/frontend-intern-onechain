@@ -3,7 +3,7 @@
     justify-content: center;
     display: flex;
     padding: 90px 0 90px 0;
-    background: url("../image/bg1.jpg");
+    background: url("../image/bgoc3.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -14,7 +14,18 @@
     justify-content: center;
     display: flex;
     padding: 90px 0 90px 0;
-    background: url("../image/bg2.jpg");
+    background: url("../image/bgoc2.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+  }
+
+  .info-main {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    padding: 90px 0 90px 0;
+    background: url("../image/bgoc1.jpeg");
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -30,5 +41,21 @@
   
   .sub-main1 {
     margin: auto;
+    width: 70%;
+  }
+
+  .search {
+    display: flex;
+    justify-content: center;
+    width: 35%;
+    align-items: center;
+    margin-left: 460px;
+    margin-top: 20px;
+    margin-bottom: 30px;
   }
   
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 40px;
+  }

@@ -1,5 +1,5 @@
 import { AddIcon, EditIcon, ExternalLinkIcon, HamburgerIcon, RepeatIcon } from '@chakra-ui/icons';
-import { Avatar, IconButton, Menu, MenuButton, MenuItem, MenuList, Flex } from '@chakra-ui/react';
+import { Avatar, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer } from '@chakra-ui/react';
 import React from "react";
 import './header.css';
 
@@ -15,20 +15,39 @@ function Header() {
     />
     <MenuList>
         <MenuItem icon={<AddIcon />}>
-        New Tab
+        Home Page
         </MenuItem>
         <MenuItem icon={<ExternalLinkIcon />}>
-        New Window
+        Student List
         </MenuItem>
         <MenuItem icon={<RepeatIcon />}>
-        Open Closed Tab
+        Notification
         </MenuItem>
         <MenuItem icon={<EditIcon />}>
-        Open File...
+        Education Program
         </MenuItem>
     </MenuList>
     </Menu>
-        <Avatar size='sm' bg='teal.500' float='right' m='10px' />
+    <Spacer />
+    <Menu>
+    <MenuButton
+        aria-label='Options'
+        variant='outline'>
+    <Avatar size='sm' bg='teal.500' float='right' />
+
+    </MenuButton>
+    <MenuList>
+        <MenuItem icon={<AddIcon />}>
+        Show Profile
+        </MenuItem>
+        <MenuItem icon={<EditIcon />}>
+        Edit Profile
+        </MenuItem>
+        <MenuItem icon={<RepeatIcon />}>
+        Logout
+        </MenuItem>
+    </MenuList>
+    </Menu>
     </div>
     )
 }

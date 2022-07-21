@@ -1,7 +1,8 @@
 .header {
     background-color: #00FFFF;
-    padding: 30px 20px;
+    padding: 10px;
     display: inline;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
     overflow: hidden;
+    display:flex;
   }

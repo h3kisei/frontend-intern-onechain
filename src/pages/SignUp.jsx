@@ -17,7 +17,7 @@ function Signup() {
       alert("Password do not match")
       return;
     }
-    registerWithEmailAndPassword(email, password).then((res) => {
+    registerWithEmailAndPassword(email, password).then(() => {
       navigate('/loginpage');
     }).catch(error => console.log(error));
 

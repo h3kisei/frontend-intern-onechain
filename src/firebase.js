@@ -1,20 +1,12 @@
 import { initializeApp } from "firebase/app";
 import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
+  createUserWithEmailAndPassword, getAuth,
+  signInWithEmailAndPassword, signOut
 } from "firebase/auth";
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  doc,
-  setDoc,
-  getDocs,
-  deleteDoc,
-  getDoc,
+  addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc
 } from "firebase/firestore";
+import { v4 as uuidv4 } from 'uuid';
 
 const firebaseConfig ={
   apiKey: "AIzaSyDxY0OgqzT_66a6OYSebhsuJW2fKRZP9lM",
@@ -54,12 +46,13 @@ const registerWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const profile = async (name, sex, age, level) => {
-  await setDoc(doc(db, "sinhvien"), {
+const profile = async (name, sex, age, level, describe) => {
+  await setDoc(doc(db, "sinhvien", uuidv4()), {
     name,
     sex,
     age,
     level,
+    describe,
   });
 };
 
@@ -81,12 +74,13 @@ const removeDataFromFirebase = async (id) => {
   await deleteDoc(doc(db, "sinhvien", id));
 };
 
-const updateData = async (name, sex, age, level, id) => {
+const updateData = async (name, sex, age, level, describe, id) => {
   await setDoc(doc(db, "sinhvien", id), {
     name,
     sex,
     age,
     level,
+    describe,
   });
 };
 
@@ -104,4 +98,4 @@ export {
   getDataFromFirebase,
   removeDataFromFirebase,
   updateData,
-}
+};

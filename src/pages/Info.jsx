@@ -7,16 +7,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import { profile } from "../firebase";
 import './styles.css';
 
+
 function Info() {
 	const [name, setName] = useState("");
 	const [sex, setSex] = useState("");
 	const [age, setAge] = useState("");
 	const [level, setLevel] = useState("");
-
+	const [describe, setDescribe] = useState("");
 	const navigate = useNavigate();
 
   return (
-    <div className="login-main">
+    <div className="info-main">
       <div className="sub-main">
         <div className="sub-main1">
         <Text fontSize='4xl' as='b'>Profile</Text>
@@ -24,8 +25,8 @@ function Info() {
           <Input placeholder='Fullname' mt='40px' type="text" onChange={(e) => setName(e.target.value)} />
 		  <Flex flex-direction='row' mt='20px'>
 		  <Select placeholder='Sex' mr='20px' onChange={(e) => setSex(e.target.value)}>
-			<option value='Male'>Nam</option>
-			<option value='Female'>Nữ</option>
+			<option value='Male'>Male</option>
+			<option value='Female'>Female</option>
 			</Select>
 			<NumberInput placeholder='Age' maxW={20} defaultValue={15} min={10} onChange={(valueAsString, valueAsNumber) => setAge(valueAsNumber)} >
 				<NumberInputField />
@@ -36,8 +37,9 @@ function Info() {
 			</NumberInput>
 			</Flex>
 		  <Input placeholder='Level' mt='20px' type="text" onChange={(e) => setLevel(e.target.value)} />
+		  <Input placeholder='Describe' mt='20px' onChange={(e) => setDescribe(e.target.value)} />
 		  <Link to='/list'>    
-        <Button colorScheme='blue' mt='20px' mb='20px' width="100%" onClick={() => profile(name, sex, age, level)} >Add Info</Button>
+        <Button colorScheme='blue' mt='20px' mb='20px' width="100%" onClick={() => profile(name, sex, age, level, describe)} >Add Info</Button>
 		</Link>
 		</div>
 </div>

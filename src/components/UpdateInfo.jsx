@@ -8,15 +8,16 @@ import React, { useState } from "react";
 import { updateData } from "../firebase";
   
 function UpdateInfo({ student }) {
-        const { name: propName, sex: propSex, age: propAge, level: propLevel, id } = student;
+        const { name: propName, sex: propSex, age: propAge, level: propLevel, describe: propDescribe, id } = student;
         const { isOpen, onOpen, onClose } = useDisclosure();
         const [name, setName] = useState(propName);
         const [sex, setSex] = useState(propSex);
         const [age, setAge] = useState(propAge);
         const [level, setLevel] = useState(propLevel);
+        const [describe, setDescribe] = useState(propDescribe);
     
         const handleUpdateInfo = () => {
-            updateData(name, sex, age, level, id).then(() => {
+            updateData(name, sex, age, level, describe, id).then(() => {
               onClose();
             });
           }
@@ -52,6 +53,7 @@ function UpdateInfo({ student }) {
                         </NumberInput>
                         </Flex>
                     <Input placeholder='Level' mt='20px' type="text" onChange={(e) => setLevel(e.target.value)} />
+                    <Input placeholder='Describe' mt='20px' onChange={(e) => setDescribe(e.target.value)} />
                 </div>
               </ModalBody>
               <ModalFooter>
