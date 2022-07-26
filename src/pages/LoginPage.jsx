@@ -10,7 +10,7 @@ function LoginPage() {
 	const [password, setPassword] = useState("");
 	const [emailErr, setEmailErr] = useState({});
 	const [passwordErr, setPasswordErr] = useState({});
-	const [user, loading, error] = useAuthState(auth);
+	const [user, loading] = useAuthState(auth);
 	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
@@ -48,9 +48,9 @@ function LoginPage() {
 	};
 	
 	const login = () => {
-		logInWithEmailAndPassword(email, password).then(res => {
+		logInWithEmailAndPassword(email, password).then(() => {
 		  navigate('/list');
-		}).catch(error => console.log(error));
+		})
 	  };
 	
 	useEffect(() => {
@@ -85,7 +85,7 @@ function LoginPage() {
 			  <NavLink to='/signup'><Text color='blue'>Already haven't a account?</Text></NavLink>
 			</div>
 		</form>
-</div>
+		</div>
       </div>
     </div>
   );

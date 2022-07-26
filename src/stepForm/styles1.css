@@ -34,7 +34,7 @@
   .sub-main {
     display: flex;
     border-radius: 10px;
-    height: 550px;
+    height: 500px;
     width: 500px;
     background-color: #FFFFFF;
   }
@@ -44,6 +44,16 @@
     width: 70%;
   }
 
+  .search {
+    display: flex;
+    justify-content: center;
+    width: 35%;
+    align-items: center;
+    margin-left: 460px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  
   .list {
     display: flex;
     flex-wrap: wrap;
@@ -58,10 +68,4 @@
   .x {
     display: flex;
     justify-content: space-between;
-  }
-
-  .avatar {
-    display: flex;
-
-    margin-top: 15px;
   }

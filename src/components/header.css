@@ -6,3 +6,11 @@
     overflow: hidden;
     display:flex;
   }
+
+.logo {
+  font-family: Lexend;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+}

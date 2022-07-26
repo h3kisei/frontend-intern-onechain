@@ -23,17 +23,10 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const logInWithEmailAndPassword = async (email, password) => {
-  try {
-    const res = await signInWithEmailAndPassword(auth, email, password);
-    return res;
-  } catch (err) {
-    console.error(err);
-    
-  }
-};
+  return await signInWithEmailAndPassword(auth, email, password);
+    };
 
 const registerWithEmailAndPassword = async (email, password) => {
-  try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
     await addDoc(collection(db, "users"), {
@@ -42,18 +35,17 @@ const registerWithEmailAndPassword = async (email, password) => {
       email,
     });
     localStorage.setItem('user', user);
-  } catch (err) {
-    console.error(err);
-  }
-};
+  };
 
-const profile = async (name, sex, age, level, describe) => {
+const profile = async (name, studentID, sex, age, level, describe, avatar) => {
   await setDoc(doc(db, "sinhvien", uuidv4()), {
     name,
+    studentID,
     sex,
     age,
     level,
     describe,
+    avatar,
   });
 };
 
@@ -75,13 +67,14 @@ const removeDataFromFirebase = async (id) => {
   await deleteDoc(doc(db, "sinhvien", id));
 };
 
-const updateData = async (name, sex, age, level, describe, id) => {
+const updateData = async (name, sex, age, level, describe, avatar, id) => {
   await setDoc(doc(db, "sinhvien", id), {
     name,
     sex,
     age,
     level,
     describe,
+    avatar,
   });
 };
 
