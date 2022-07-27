@@ -45,13 +45,13 @@ function List() {
         </Link>
         </Flex>
         <Flex ml='30px' mr='30px' mt='20px' mb='20px'>
-        <Select defaultValue='All' width='30%' width='10%' onChange={(e) => setFilterSex(e.target.value)}>
+        <Select defaultValue='All' width='80px' onChange={(e) => setFilterSex(e.target.value)}>
             <option value='All'>All</option>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
         </Select>
         <Spacer />
-        <Flex width='30%'>
+        <Flex width='200px'>
             <Input placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
             <IconButton
                 ml='10px'
@@ -83,8 +83,6 @@ function List() {
                 <div>{student.sex}</div>
                 </Badge>    
             </Box>
-            <Spacer />
-            <Image src={student.avatar} />
         </Flex>
         <Box display='flex' alignItems='baseline' mb='15px'>
             <Box
@@ -100,7 +98,7 @@ function List() {
         </Box>
 
         <Box display='flex' mt='2' alignItems='flex-end' justifyContent='center'>
-        <ModalInfo name={student.name} studentID={student.studentID} sex={student.sex} age={student.age} level={student.level} describe={student.describe} />
+        <ModalInfo name={student.name} studentID={student.studentID} sex={student.sex} age={student.age} level={student.level} describe={student.describe} birth={student.birth} hometown={student.hometown} />
         <UpdateInfo student={student} />
         <DeleteInfo student={student} />
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>

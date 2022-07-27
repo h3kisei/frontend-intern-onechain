@@ -8,17 +8,18 @@ import React, { useState } from "react";
 import { updateData } from "../firebase";
   
 function UpdateInfo({ student }) {
-        const { name: propName, sex: propSex, age: propAge, level: propLevel, describe: propDescribe, avatar: propAvatar, id } = student;
+        const { name: propName, sex: propSex, age: propAge, level: propLevel, describe: propDescribe, birth: propBirth, hometown: propHomeTown,id } = student;
         const { isOpen, onOpen, onClose } = useDisclosure();
         const [name, setName] = useState(propName);
         const [sex, setSex] = useState(propSex);
         const [age, setAge] = useState(propAge);
+        const [birth, setBirth] = useState(propBirth);
+        const [hometown, setHomeTown] = useState(propHomeTown);
         const [level, setLevel] = useState(propLevel);
         const [describe, setDescribe] = useState(propDescribe);
-        const [avatar, setAvatar] = useState(propAvatar);
     
         const handleUpdateInfo = () => {
-            updateData(name, sex, age, level, describe, avatar, id).then(() => {
+            updateData(name, sex, age, birth, hometown, level, describe, id).then(() => {
               onClose();
             });
           }
@@ -53,11 +54,17 @@ function UpdateInfo({ student }) {
                             </NumberInputStepper>
                         </NumberInput>
                         </Flex>
+                    <Input
+                        mt='15px'			
+                        placeHolder="Select Date and Time"
+                        size="md"
+                        backgroundColor="#ffffff"
+                        type="datetime-local"
+                        onChange={(e) => setBirth(e.target.value)}
+                        />
+                      <Input placeholder='Home Town' mt='15px' type="text" onChange={(e) => setHomeTown(e.target.value)} />
                     <Input placeholder='Level' mt='15px' type="text" onChange={(e) => setLevel(e.target.value)} />
                     <Input placeholder='Describe' mt='15px' onChange={(e) => setDescribe(e.target.value)} />
-                    <Flex mt='15px'>
-                      <input type="file" id="file-upload" accept=".jpg, .png" onChange={(e) => setAvatar(e.target.value)} required />
-                    </Flex>
                 </div>
               </ModalBody>
               <ModalFooter>

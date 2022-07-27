@@ -6,7 +6,7 @@ import {
 import { InfoIcon } from "@chakra-ui/icons";
 import React from "react";
 
-function ModalInfo({ name, studentID, sex, age, level, describe }) {
+function ModalInfo({ name, studentID, sex, age, birth, hometown, level, describe }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   
     return (
@@ -32,6 +32,8 @@ function ModalInfo({ name, studentID, sex, age, level, describe }) {
                 <ListItem>Sex: {sex}</ListItem>
                 <ListItem>Student ID: {studentID}</ListItem>
                 <ListItem>Age: {age}</ListItem>
+                <ListItem>Birth: {birth}</ListItem>
+                <ListItem>Home Town: {hometown}</ListItem>
                 <ListItem>Level: {level}</ListItem>
                 <ListItem>Describe: {describe}</ListItem>
               </UnorderedList>

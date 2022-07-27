@@ -3,7 +3,7 @@ import StepOne from "../stepForm/StepOne";
 import StepTwo from "../stepForm/StepTwo";
 
 function MultiStepForm() {
-    const [step, setstep] = useState(1);
+    const [step, setStep] = useState(1);
 
     const [formData, setFormData] = useState({
       firstName: "",
@@ -13,11 +13,11 @@ function MultiStepForm() {
     })
 
     const nextStep = () => {
-      setstep(step + 1);
+      setStep(step + 1);
     };
   
     const prevStep = () => {
-      setstep(step - 1);
+      setStep(step - 1);
     };
 
     const handleInputData = input => e => {
@@ -41,7 +41,5 @@ switch (step) {
 
     }
 }
-
-
 
 export default MultiStepForm;

@@ -5,29 +5,30 @@ import {
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { profile } from "../firebase";
-import './styles.css';
+import './info.css';
 
 
 function Info() {
 	const [name, setName] = useState("");
 	const [studentID, setStudentID] = useState("");
-	const [avatar, setAvatar] = useState(null);
 	const [sex, setSex] = useState("");
 	const [age, setAge] = useState("");
+	const [birth, setBirth] = useState("");
+	const [hometown, setHomeTown] = useState("");
 	const [level, setLevel] = useState("");
 	const [describe, setDescribe] = useState("");
 	const navigate = useNavigate();
 
 	const info = () => {
-		profile(name, studentID, sex, age, level, describe, avatar).then(() => {
+		profile(name, studentID, sex, age, level, birth, hometown, describe).then(() => {
 		  navigate('/list');
 		}).catch(error => console.log(error));
 	  };
 
   return (
     <div className="info-main">
-      <div className="sub-main">
-        <div className="sub-main1">
+      <div className="sub-maini">
+        <div className="sub-maini1">
         <Text fontSize='4xl' as='b'>Profile</Text>
 		<div>
           <Input placeholder='Fullname' mt='30px' type="text" onChange={(e) => setName(e.target.value)} />
@@ -45,24 +46,17 @@ function Info() {
 				</NumberInputStepper>
 			</NumberInput>
 			</Flex>
+			<Input
+				mt='15px'			
+				placeHolder="Select Date and Time"
+				size="md"
+				backgroundColor="#ffffff"
+				type="datetime-local"
+				onChange={(e) => setBirth(e.target.value)}
+				/>
+			<Input placeholder='Home Town' mt='15px' type="text" onChange={(e) => setHomeTown(e.target.value)} />
 		  <Input placeholder='Level' mt='15px' type="text" onChange={(e) => setLevel(e.target.value)} />
 		  <Input placeholder='Describe' mt='15px' onChange={(e) => setDescribe(e.target.value)} />
-		  {/* <div className="avatar">
-		  {avatar && (
-        <div>
-        <img alt="not fount" width={"100px"} src={URL.createObjectURL(avatar)} />
-        <br />
-        <button onClick={()=>setAvatar(null)}>Remove</button>
-        </div>
-      )}
-		<input
-        type="file"
-        name="myImage"
-        onChange={(e) => {
-          setAvatar(e.target.files[0]);
-        }}
-      />
-		  </div> */}
 		  <Link to='/list'>    
         <Button colorScheme='blue' mt='20px' mb='20px' width="100%" onClick={ info } >Add Info</Button>
 		</Link>
