@@ -26,12 +26,6 @@
     width: 80%;
 }
 
-.list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 40px;
-}
-
 .x {
     display: flex;
     justify-content: space-between;

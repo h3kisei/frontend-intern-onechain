@@ -64,7 +64,7 @@ function List() {
         </Flex>
         <div className="list">
         {sinhvien.length > 0 && sinhvien.map(student => (
-            <Box maxW='sm' borderWidth='1px' borderRadius='lg' height='200px' width='300px' m='20px' key={student.id}>
+            <Box maxW='sm' borderWidth='1px' borderRadius='lg' height='200px' width='300px' m='25px' key={student.id}>
             <Box p='6'>
             <Box
                 display='flex' justifyContent='center'
