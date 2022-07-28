@@ -62,9 +62,9 @@ function LoginPage() {
       <div className="sub-main">
         <div className="sub-main1">
 		<form onSubmit={handleSubmit}>
-        <Text fontSize='4xl' as='b'>Login Page</Text>
+        <Text fontSize='3xl' as='b'>Login Page</Text>
 		<div>
-          <Input placeholder='Email' mt='40px' type="email" onChange={(e) => {setEmail(e.target.value)}} />
+          <Input placeholder='Email' mt='30px' type="email" onChange={(e) => {setEmail(e.target.value)}} />
 		  {Object.keys(emailErr).map((key) => {
 			  return <div className="err">{emailErr[key]}</div>
 		  })}
@@ -81,7 +81,7 @@ function LoginPage() {
 			{Object.keys(passwordErr).map((key) => {
 			  return <div className="err">{passwordErr[key]}</div>
 		  })}  
-              <Button colorScheme='blue' mt='40px' mb='20px' width="100%" type="submit" onClick={ login } >Login</Button>
+              <Button colorScheme='blue' mt='30px' mb='20px' width="100%" type="submit" onClick={ login } >Login</Button>
 			  <NavLink to='/signup'><Text color='blue'>Already haven't a account?</Text></NavLink>
 			</div>
 		</form>

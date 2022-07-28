@@ -27,9 +27,9 @@ const logInWithEmailAndPassword = async (email, password) => {
     };
 
 const registerWithEmailAndPassword = async (email, password, firstName, lastName) => {
-    const res = await createUserWithEmailAndPassword(auth, email, password, firstName, lastName);
+    const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
+    await setDoc(doc(db, "users", uuidv4()), {
       uid: user.uid,
       authProvider: "local",
       email,
@@ -72,7 +72,7 @@ const removeDataFromFirebase = async (id) => {
   await deleteDoc(doc(db, "sinhvien", id));
 };
 
-const updateData = async (name, sex, age, birth, hometown, level, describe, avatar, id) => {
+const updateData = async (name, sex, age, birth, hometown, level, describe, id) => {
   await setDoc(doc(db, "sinhvien", id), {
     name,
     sex,
@@ -81,13 +81,13 @@ const updateData = async (name, sex, age, birth, hometown, level, describe, avat
     hometown,
     level,
     describe,
-    avatar,
   });
 };
 
-const logout = () => {
-  signOut(auth);
-};
+const logout = async () => { 
+  const res = await signOut(auth); 
+  return res; 
+}
 
 export {
   auth,

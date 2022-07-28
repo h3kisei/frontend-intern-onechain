@@ -1,6 +1,6 @@
 import {
 	Button, Flex, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput,
-	NumberInputField, NumberInputStepper, Select, Text, Image
+	NumberInputField, NumberInputStepper, Select, Text
 } from '@chakra-ui/react';
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';

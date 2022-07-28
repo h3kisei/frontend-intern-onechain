@@ -1,59 +1,76 @@
+/* For desktop: */
 .login-main {
   align-items: center;
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    padding: 90px 0 90px 0;
-    background: url("../image/bgoc3.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-  }
-  
-  .signup-main {
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    display: flex;
-    padding: 90px 0 90px 0;
-    background: url("../image/bgoc2.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
-    width: 100%;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  padding: 90px 0 90px 0;
+  background: url("../assets/bgoc3.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.signup-main {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  padding: 90px 0 90px 0;
+  background: url("../assets/bgoc2.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.sub-main {
+  display: flex;
+  border-radius: 10px;
+  height: 70%;
+  width: 35%;
+  background-color: #FFFFFF;
+}
+
+.sub-main1 {
+  margin: auto;
+  width: 80%;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 20px;
+}
+
+.err {
+  display: inline;
+  color: red;
+}
+
+.x {
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar {
+  display: flex;
+
+  margin-top: 15px;
+}
+
+.search {
+  width: 30%;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="sub-main"] {
+    height: 75%;
+    width: 75%;
   }
 
-  .sub-main {
-    display: flex;
-    border-radius: 10px;
-    height: 70%;
-    width: 70%;
-    background-color: #FFFFFF;
-  }
-  
-  .sub-main1 {
-    margin: auto;
-    width: 80%;
+  [class*="search"] {
+    width: 180px;
   }
 
-  .list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: 20px;
-  }
-
-  .err {
-    display: inline;
-    color: red;
-  }
-
-  .x {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .avatar {
-    display: flex;
-
-    margin-top: 15px;
-  }
+}

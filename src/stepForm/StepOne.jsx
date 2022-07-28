@@ -14,7 +14,7 @@ const StepOne = ({ nextStep, handleFormData, values }) => {
       <div className="sub-main">
         <div className="sub-main1">
         <form onSubmit={submitFormData}>
-        <Text fontSize='4xl' as='b'>Sign Up</Text>
+        <Text fontSize='3xl' as='b'>Sign Up</Text>
 		    <div>
         <Input 
             mt='40px'
@@ -25,16 +25,16 @@ const StepOne = ({ nextStep, handleFormData, values }) => {
             onChange={handleFormData("firstName")} />
         <Input 
             mt='20px'
-            mb='40px'
+            mb='30px'
             name="lastName"
             defaultValue={values.lastName}
             type="text"
             placeholder="Last Name"
             onChange={handleFormData("lastName")} />
-          <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit">Next</Button>
           <Flex justify="flex-end">
-					    <NavLink to='/loginpage'><Text color='blue'>Already have a account?</Text></NavLink>
-				  </Flex>
+            <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit">Next</Button>
+          </Flex>
+         <NavLink to='/loginpage'><Text color='blue'>Already have a account?</Text></NavLink>
           </div>
       </form>
 			</div>

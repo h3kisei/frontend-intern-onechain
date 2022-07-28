@@ -41,17 +41,18 @@ function List() {
         <div>
         <Flex mt='15px' mr='30px' justifyContent='flex-end'>
         <Link to='/info'>
-        <Button colorScheme='blue' width="120px">Add Student</Button>
+        <Button colorScheme='blue' width="110px">Add Student</Button>
         </Link>
         </Flex>
         <Flex ml='30px' mr='30px' mt='20px' mb='20px'>
-        <Select defaultValue='All' width='80px' onChange={(e) => setFilterSex(e.target.value)}>
+        <Select defaultValue='All' width='110px' onChange={(e) => setFilterSex(e.target.value)}>
             <option value='All'>All</option>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
         </Select>
         <Spacer />
-        <Flex width='200px'>
+        <div className="search">
+        <Flex>
             <Input placeholder='Search' onChange={(e) => setSearch(e.target.value)} />
             <IconButton
                 ml='10px'
@@ -61,10 +62,11 @@ function List() {
                 onClick= {filterListStudentBy}
                 />
         </Flex>
+        </div>
         </Flex>
         <div className="list">
         {sinhvien.length > 0 && sinhvien.map(student => (
-            <Box maxW='sm' borderWidth='1px' borderRadius='lg' height='200px' width='300px' m='25px' key={student.id}>
+            <Box maxW='sm' borderWidth='1px' borderRadius='lg' height='210px' width='310px' m='20px' key={student.id}>
             <Box p='6'>
             <Box
                 display='flex' justifyContent='center'
@@ -84,7 +86,7 @@ function List() {
                 </Badge>    
             </Box>
         </Flex>
-        <Box display='flex' alignItems='baseline' mb='15px'>
+        <Box display='flex' alignItems='baseline' mb='30px'>
             <Box
                 color='gray.500'
                 fontWeight='semibold'

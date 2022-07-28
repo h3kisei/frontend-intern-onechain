@@ -84,7 +84,7 @@ function StepTwo({ prevStep }) {
 			<form onSubmit={handleSubmit}>
 				<Text fontSize='4xl' as='b'>Sign Up</Text>
 					<div>
-				<Input placeholder='Email' mt='40px' type="email" onChange={(e) => setEmail(e.target.value)} />
+				<Input placeholder='Email' mt='30px' type="email" onChange={(e) => setEmail(e.target.value)} />
 				{Object.keys(emailErr).map((key) => {
 					return <div className="err">{emailErr[key]}</div>
 				})}
@@ -103,7 +103,7 @@ function StepTwo({ prevStep }) {
 					})}     
 				<InputGroup size='md'>
 							<Input
-							mb='20px'
+							mb='10px'
 							pr='4.5rem'
 							type={'password'}
 							placeholder=' Re enter password'
