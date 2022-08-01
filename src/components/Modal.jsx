@@ -19,6 +19,7 @@ function ModalInfo({ name, studentID, sex, age, birth, hometown, level, describe
         aria-label='Info'
         icon={<InfoIcon />}
       />
+      <div className="modal">
         <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
@@ -46,6 +47,7 @@ function ModalInfo({ name, studentID, sex, age, birth, hometown, level, describe
             </ModalFooter>
           </ModalContent>
         </Modal>
+        </div>
       </>
     )
   }

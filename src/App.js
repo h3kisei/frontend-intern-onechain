@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import LoginPage from './pages/LoginPage';
 import List from './pages/List';
 import Info from './pages/Info';
-import MultiStepSignup from './pages/MultiStepSignup';
+import MultiStepSignup from './pages/MultiStepForm';
 import { ChakraProvider } from '@chakra-ui/react'
 
 

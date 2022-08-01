@@ -27,20 +27,15 @@ const logInWithEmailAndPassword = async (email, password) => {
     };
 
 const registerWithEmailAndPassword = async (email, password, firstName, lastName) => {
-    const res = await createUserWithEmailAndPassword(auth, email, password);
-    const user = res.user;
-    await setDoc(doc(db, "users", uuidv4()), {
-      uid: user.uid,
-      authProvider: "local",
-      email,
-      password,
+    const registeredUser = await createUserWithEmailAndPassword(auth, email, password);
+    await setDoc(doc(db, "userDetails", registeredUser.user.uid), {
       firstName,
       lastName,
     });
-    localStorage.setItem('user', user);
+    localStorage.setItem('user', registeredUser.user.getIdTokenResult());
   };
 
-const profile = async (name, studentID, sex, age, birth, hometown, level, describe, avatar) => {
+const profile = async (name, studentID, sex, age, birth, hometown, level, describe) => {
   await setDoc(doc(db, "sinhvien", uuidv4()), {
     name,
     studentID,
@@ -50,7 +45,6 @@ const profile = async (name, studentID, sex, age, birth, hometown, level, descri
     hometown,
     level,
     describe,
-    avatar,
   });
 };
 

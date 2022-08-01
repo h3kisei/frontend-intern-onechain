@@ -48,7 +48,7 @@ function Info() {
 			</Flex>
 			<Input
 				mt='15px'			
-				placeHolder="Select Date and Time"
+				placeholder="Select Date and Time"
 				size="md"
 				backgroundColor="#ffffff"
 				type="datetime-local"
