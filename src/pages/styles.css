@@ -47,6 +47,11 @@
   color: red;
 }
 
+.err {
+  display: inline;
+  color: red;
+}
+
 .x {
   display: flex;
   justify-content: space-between;
@@ -62,11 +67,12 @@
   width: 30%;
 }
 
-@media only screen and (max-width: 768px, min-height: 800px) {
+@media only screen and (max-width: 768px) {
   /* For mobile phones: */
   [class*="sub-main"] {
     height: 75%;
     width: 75%;
+    min-height: 300px;
   }
 
   [class*="search"] {
