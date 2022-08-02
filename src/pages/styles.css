@@ -62,7 +62,7 @@
   width: 30%;
 }
 
-@media only screen and (max-width: 768px, min-height: 500px) {
+@media only screen and (max-width: 768px, min-height: 800px) {
   /* For mobile phones: */
   [class*="sub-main"] {
     height: 75%;

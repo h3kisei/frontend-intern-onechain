@@ -35,7 +35,7 @@
     margin-top: 15px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px, min-height: 800px) {
     /* For mobile phones: */
     [class*="sub-maini"] {
       height: 100%;
