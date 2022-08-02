@@ -1,5 +1,5 @@
 import { SearchIcon } from '@chakra-ui/icons';
-import { Badge, Box, Button, Flex, IconButton, Input, Select, Spacer, Image } from "@chakra-ui/react";
+import { Badge, Box, Button, Flex, IconButton, Input, Select, Spacer } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import DeleteInfo from "../components/DeleteInfo.jsx";

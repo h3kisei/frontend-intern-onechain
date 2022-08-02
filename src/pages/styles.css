@@ -5,10 +5,16 @@
   justify-content: center;
   display: flex;
   padding: 90px 0 90px 0;
-  background: url("../assets/bgoc3.jpeg");
+  background: url("../assets/bgoc4.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+}
+
+.home {
+  background: url("../assets/bgoc4.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .signup-main {
@@ -17,7 +23,7 @@
   justify-content: center;
   display: flex;
   padding: 90px 0 90px 0;
-  background: url("../assets/bgoc2.jpeg");
+  background: url("../assets/bgoc5.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -42,7 +48,7 @@
   margin-left: 20px;
 }
 
-.err {
+.errors {
   display: inline;
   color: red;
 }
@@ -65,7 +71,7 @@
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   [class*="sub-main"] {
-    height: 75%;
+    height: 85%;
     width: 75%;
   }
 

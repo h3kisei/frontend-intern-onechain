@@ -17,18 +17,34 @@ function MultiStepForm() {
     passwordConfirm: "",
   })
   const [errors, setErrors] = useState({
+    firstName: null,
+    lastName: null,
     email: null,
     password: null,
     passwordConfirm: null
   });
   
-  const formValidation = (email, password, passwordConfirm) => {
+  const formValidation = (firstName, lastName, email, password, passwordConfirm) => {
     let errors = {
+      firstName: null,
+      lastName: null,
       email: null,
       password: null,
       passwordConfirm: null,
     };
     
+    if (!firstName) {
+      errors = {
+        ...errors,
+        firstName: "FirstName is required!"
+      }
+    }
+    if (!lastName) {
+      errors = {
+        ...errors,
+        lastName: "LastName is required!"
+      }
+    }
     if (!email) {
       errors = {
         ...errors,
@@ -47,13 +63,13 @@ function MultiStepForm() {
     if (!passwordConfirm) {
       errors = {
         ...errors,
-        password: "Password is required!"
+        passwordConfirm: "PasswordConfirm is required!"
       }
     } 
     if (passwordConfirm !== password) {
       errors = {
         ...errors,
-        password: "PasswordConfirm is invalid!"
+        passwordConfirm: "PasswordConfirm is invalid!"
       }
     } 
     for (const key in errors) {
@@ -76,12 +92,12 @@ function MultiStepForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password, passwordConfirm, firstName, lastName} = formData;
-    const {errors, isValid} = formValidation(email, password, passwordConfirm);
+    const {errors, isValid} = formValidation(firstName, lastName, email, password, passwordConfirm);
     setErrors(errors);
     if(isValid){
       registerWithEmailAndPassword(email, password, firstName, lastName).then((res) => {
       console.log(res);
-      navigate('/loginpage');
+      navigate('/');
     })
     };
   };

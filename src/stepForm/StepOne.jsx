@@ -3,7 +3,7 @@ import React from "react";
 import { NavLink } from 'react-router-dom';
 import '../pages/styles.css';
 
-const StepOne = ({ nextStep, handleFormData, values }) => {
+const StepOne = ({ nextStep, handleFormData, values, errors }) => {
     const submitFormData = (e) => {
       e.preventDefault();
         nextStep();
@@ -22,7 +22,11 @@ const StepOne = ({ nextStep, handleFormData, values }) => {
             defaultValue={values.firstName}
             type="text"
             placeholder="First Name"
+            isInvalid={errors?.firstName}
             onChange={handleFormData("firstName")} />
+            {!!errors?.firstName && (
+              <div className="errors">{errors?.firstName}</div>
+            )}
         <Input 
             mt='20px'
             mb='30px'
@@ -30,11 +34,15 @@ const StepOne = ({ nextStep, handleFormData, values }) => {
             defaultValue={values.lastName}
             type="text"
             placeholder="Last Name"
+            isInvalid={errors?.lastName}
             onChange={handleFormData("lastName")} />
+            {!!errors?.lastName && (
+              <div className="errors">{errors?.lastName}</div>
+            )}
           <Flex justify="flex-end">
             <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit">Next</Button>
           </Flex>
-         <NavLink to='/loginpage'><Text color='blue'>Already have a account?</Text></NavLink>
+         <NavLink to='/'><Text color='blue'>Already have a account?</Text></NavLink>
           </div>
       </form>
 			</div>

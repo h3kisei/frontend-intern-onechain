@@ -1,5 +1,4 @@
-import { Button, Flex, Input, InputGroup, Spacer, Text, FormHelperText,
-	FormErrorMessage, FormControl } from '@chakra-ui/react';
+import { Button, Flex, Input, InputGroup, Spacer, Text } from '@chakra-ui/react';
 import '../pages/styles.css';
 
 function StepTwo({ prevStep, handleSubmit, errors, handleFormData }) {
@@ -13,13 +12,12 @@ function StepTwo({ prevStep, handleSubmit, errors, handleFormData }) {
 			<div className="sub-main1">
 			<form onSubmit={handleSubmit}>
 				<Text fontSize='4xl' as='b'>Sign Up</Text>
-					<div>
-					<FormControl>
+				<div className="errors">
 				<Input placeholder='Email' mt='30px' type="email" onChange={handleFormData("email")} isInvalid={errors?.email} />
 				{!!errors?.email && (
-					<FormErrorMessage>{errors?.email}</FormErrorMessage>
+					<div className="errors">{errors?.email}</div>
 				)}
-				</FormControl>
+				
 				<InputGroup size='md'>
 					<Input
 					mt='20px'
@@ -31,19 +29,25 @@ function StepTwo({ prevStep, handleSubmit, errors, handleFormData }) {
 					isInvalid={errors?.password}
 					/>
 				</InputGroup>   
-				{!!errors?.password && (
-					<FormErrorMessage>{errors?.password}</FormErrorMessage>
-					
+				{!!errors?.email && (
+					<div className="errors">{errors?.password}</div>
 				)}
-				<InputGroup size='md'>
-							<Input
-							mb='10px'
-							pr='4.5rem'
-							type={'password'}
-							placeholder='Re enter password'
-							onChange={handleFormData("passwordConfirm")}
-							/>
+
+				<InputGroup 
+					size='md'>
+					<Input
+					mb='10px'
+					pr='4.5rem'
+					type={'password'}
+					placeholder='Re enter password'
+					onChange={handleFormData("passwordConfirm")}
+					isInvalid={errors?.email}
+					/>
 				</InputGroup>
+				{!!errors?.email && (
+					<div className="errors">{errors?.passwordConfirm}</div>
+				)}
+
 				<Flex> 
 				<Button colorScheme='blue' mt='20px' mb='20px' width='30%' onClick = { handleBack}>Back</Button>
 				<Spacer />

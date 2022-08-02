@@ -13,8 +13,7 @@ function App() {
     <ChakraProvider>
         <div className="App">
         <Routes>
-          <Route path="/" element={(<div>Hello</div>)} />
-          <Route path="/loginpage" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="/list" element={<List />} />
           <Route path="/info" element={<Info />} />
           <Route path="/signup" element={<MultiStepSignup />} />

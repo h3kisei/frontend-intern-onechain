@@ -20,7 +20,7 @@ function Info() {
 	const navigate = useNavigate();
 
 	const info = () => {
-		profile(name, studentID, sex, age, level, birth, hometown, describe).then(() => {
+		profile(name, studentID, sex, age, birth, hometown, level, describe).then(() => {
 		  navigate('/list');
 		}).catch(error => console.log(error));
 	  };
