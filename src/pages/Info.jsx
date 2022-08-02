@@ -48,10 +48,10 @@ function Info() {
 			</Flex>
 			<Input
 				mt='15px'			
-				placeholder="Select Date and Time"
+				placeholder="Select Date"
 				size="md"
 				backgroundColor="#ffffff"
-				type="datetime-local"
+				type="date"
 				onChange={(e) => setBirth(e.target.value)}
 				/>
 			<Input placeholder='Home Town' mt='15px' type="text" onChange={(e) => setHomeTown(e.target.value)} />

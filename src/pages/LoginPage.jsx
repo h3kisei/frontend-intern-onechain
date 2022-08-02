@@ -34,11 +34,9 @@ function LoginPage() {
 		  if (!password) {
 			passwordErr = "Password is required!";
 			isValid = false;
-		  } else if (password.length < 4) {
-			passwordErr = "Password must be more than 4 characters";
-			isValid = false;
-		  } else if (password.length > 10) {
-			passwordErr = "Password cannot exceed more than 10 characters";
+		  } 
+			if (password.length < 6 && password.length > 10) {
+			passwordErr = "Password must be more than 6 characters and cannot exceed more than 10 characters";
 			isValid = false;
 		  }
 
