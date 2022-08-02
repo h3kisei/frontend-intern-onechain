@@ -3,9 +3,7 @@ import {
   createUserWithEmailAndPassword, getAuth,
   signInWithEmailAndPassword, signOut
 } from "firebase/auth";
-import {
-  addDoc, collection, deleteDoc, doc, getDocs, getFirestore, setDoc
-} from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, getFirestore, setDoc } from "firebase/firestore";
 import { v4 as uuidv4 } from 'uuid';
 
 const firebaseConfig ={

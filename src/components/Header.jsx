@@ -1,14 +1,14 @@
-import { AddIcon, HamburgerIcon, RepeatIcon } from '@chakra-ui/icons';
+import { HamburgerIcon, RepeatIcon } from '@chakra-ui/icons';
 import {
-    Avatar, Button, Divider, Drawer,
-    DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter,
-    DrawerHeader,
-    DrawerOverlay, Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, useDisclosure
+  Avatar, Button, Divider, Drawer,
+  DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay, Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, useDisclosure
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from 'react-router-dom';
-import { auth, logout, getDataFromFirebase } from "../firebase";
+import { auth, logout } from "../firebase";
 import './header.css';
 
 
