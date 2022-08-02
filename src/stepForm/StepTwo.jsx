@@ -12,7 +12,7 @@ function StepTwo({ prevStep, handleSubmit, errors, handleFormData }) {
 			<div className="sub-main1">
 			<form onSubmit={handleSubmit}>
 				<Text fontSize='4xl' as='b'>Sign Up</Text>
-				<div className="errors">
+				<div>
 				<Input placeholder='Email' mt='30px' type="email" onChange={handleFormData("email")} isInvalid={errors?.email} />
 				{!!errors?.email && (
 					<div className="errors">{errors?.email}</div>

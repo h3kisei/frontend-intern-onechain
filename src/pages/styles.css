@@ -11,12 +11,6 @@
   height: 100vh;
 }
 
-.home {
-  background: url("../assets/bgoc4.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 .signup-main {
   align-items: center;
   text-align: center;
