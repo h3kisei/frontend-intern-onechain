@@ -1,12 +1,12 @@
 import {
   Button, Modal, ModalBody, ModalCloseButton,
   ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, IconButton, useDisclosure,
-  UnorderedList, ListItem
+  UnorderedList, ListItem, Flex, Spacer
 } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
 import React from "react";
 
-function ModalInfo({ name, studentID, sex, age, birth, hometown, level, describe }) {
+function ModalInfo({ name, studentID, sex, age, birth, hometown, level, describe, avatar }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   
     return (
@@ -26,6 +26,8 @@ function ModalInfo({ name, studentID, sex, age, birth, hometown, level, describe
             <ModalHeader>Student Info</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
+            <Flex>
+            <Flex flexDirection='column'>
               <Text fontWeight='bold' mb='1rem'>
                 Fullname: {name}
               </Text>
@@ -38,8 +40,11 @@ function ModalInfo({ name, studentID, sex, age, birth, hometown, level, describe
                 <ListItem>Level: {level}</ListItem>
                 <ListItem>Describe: {describe}</ListItem>
               </UnorderedList>
+              </Flex>
+              <Spacer />
+              <img src={ avatar } />
+            </Flex>
             </ModalBody>
-  
             <ModalFooter>
               <Button colorScheme='blue' mr={3} onClick={onClose}>
                 Close

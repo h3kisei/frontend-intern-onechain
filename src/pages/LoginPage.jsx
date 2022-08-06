@@ -4,6 +4,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { auth, logInWithEmailAndPassword } from "../firebase";
 import './styles.css';
+import { useCookies } from "js-cookie";
+import Cookies from 'js-cookie';
 
 function LoginPage() {
 	const [email, setEmail] = useState("");
@@ -11,6 +13,7 @@ function LoginPage() {
 	const [emailErr, setEmailErr] = useState({});
 	const [passwordErr, setPasswordErr] = useState({});
 	const [user, loading] = useAuthState(auth);
+	const [isLoading, setIsLoading] = useState(true);
 	const navigate = useNavigate();
 
 	const handleSubmit = (e) => {
@@ -54,6 +57,13 @@ function LoginPage() {
 	useEffect(() => {
 		if (loading) return;
 	  }, [user, loading]);
+
+	function setCookie(cname, cvalue, exdays) {
+	const d = new Date();
+	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+	let expires = "expires=" + d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 
   return (
     <div className="login-main">

@@ -1,6 +1,6 @@
 import { HamburgerIcon, RepeatIcon } from '@chakra-ui/icons';
 import {
-  Avatar, Button, Divider, Drawer,
+  AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Avatar, Button, Divider, Drawer,
   DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter,
   DrawerHeader,
   DrawerOverlay, Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, useDisclosure
@@ -13,17 +13,11 @@ import './header.css';
 
 
 function Header() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
   const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
-  // const [userDetails, setUserDetails] = useState([]);
-
-  // useEffect(() => {
-  //   getDataFromFirebase('userDetails').then(results => {
-  //       setUserDetails(results);
-  //   })
-  // }, []);
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef()
 
   const out = () => {
     logout().then(() => {
@@ -102,9 +96,38 @@ function Header() {
         <Avatar size='sm' bg='teal.500' float='right' />
     </MenuButton>
     <MenuList>
-        <MenuItem icon={<RepeatIcon />} onClick = { out } >
+        <>  
+        <MenuItem icon={<RepeatIcon />} onClick = { onOpen } >
         Logout
         </MenuItem>
+
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Logout
+            </AlertDialogHeader>
+
+            <AlertDialogBody>
+              Are you sure? You can't undo this action afterwards.
+            </AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={onClose}>
+                Cancel
+              </Button>
+              <Button colorScheme='red' onClick={ out } ml={3}>
+                Logout
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+    </>
     </MenuList>
     </Menu>
     </div>

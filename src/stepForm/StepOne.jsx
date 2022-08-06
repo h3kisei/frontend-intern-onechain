@@ -1,54 +1,58 @@
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
-import React from "react";
-import { NavLink } from 'react-router-dom';
+import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
 import '../pages/styles.css';
 
-const StepOne = ({ nextStep, handleFormData, values, errors }) => {
-    const submitFormData = (e) => {
-      e.preventDefault();
-        nextStep();
-      };
+function StepOne({ handleNext, handleSubmit, errors, handleFormData }) {
+	return (
+		<div className="signup-main">
+		<div className="sub-main">
+			<div className="sub-main1">
+			<form onSubmit={handleSubmit}>
+				<Text fontSize='4xl' as='b'>Sign Up</Text>
+				<div>
+				<Input placeholder='Email' mt='30px' type="email" onChange={handleFormData("email")} isInvalid={errors?.email} />
+				{!!errors?.email && (
+					<div className="errors">{errors?.email}</div>
+				)}
+				
+				<InputGroup size='md'>
+					<Input
+					mt='20px'
+					mb='20px'
+					pr='4.5rem'
+					type={'password'}
+					placeholder='Enter password'
+					onChange={handleFormData("password")}
+					isInvalid={errors?.password}
+					/>
+				</InputGroup>   
+				{!!errors?.email && (
+					<div className="errors">{errors?.password}</div>
+				)}
 
-  return (
-    <div className="signup-main">
-      <div className="sub-main">
-        <div className="sub-main1">
-        <form onSubmit={submitFormData}>
-        <Text fontSize='3xl' as='b'>Sign Up</Text>
-		    <div>
-        <Input 
-            mt='40px'
-            name="firstName"
-            defaultValue={values.firstName}
-            type="text"
-            placeholder="First Name"
-            isInvalid={errors?.firstName}
-            onChange={handleFormData("firstName")} />
-            {!!errors?.firstName && (
-              <div className="errors">{errors?.firstName}</div>
-            )}
-        <Input 
-            mt='20px'
-            mb='30px'
-            name="lastName"
-            defaultValue={values.lastName}
-            type="text"
-            placeholder="Last Name"
-            isInvalid={errors?.lastName}
-            onChange={handleFormData("lastName")} />
-            {!!errors?.lastName && (
-              <div className="errors">{errors?.lastName}</div>
-            )}
-          <Flex justify="flex-end">
-            <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit">Next</Button>
-          </Flex>
-         <NavLink to='/'><Text color='blue'>Already have a account?</Text></NavLink>
-          </div>
-      </form>
+				<InputGroup 
+					size='md'>
+					<Input
+					mb='10px'
+					pr='4.5rem'
+					type={'password'}
+					placeholder='Re enter password'
+					onChange={handleFormData("passwordConfirm")}
+					isInvalid={errors?.email}
+					/>
+				</InputGroup>
+				{!!errors?.email && (
+					<div className="errors">{errors?.passwordConfirm}</div>
+				)}
+
+				<Flex justifyContent='flex-end'> 
+				<Button colorScheme='blue' mt='20px' mb='20px' width='30%' onClick = { handleNext }>Next</Button>
+				</Flex>
+				</div>
+			</form>
 			</div>
-</div>
-      </div>
-  );
+		</div>
+		</div>
+	);
   }
 
 export default StepOne;

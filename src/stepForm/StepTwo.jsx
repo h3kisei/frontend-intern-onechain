@@ -1,64 +1,56 @@
-import { Button, Flex, Input, InputGroup, Spacer, Text } from '@chakra-ui/react';
+import { Button, Flex, Input, Text, Spacer } from '@chakra-ui/react';
+import React from "react";
+import { NavLink } from 'react-router-dom';
 import '../pages/styles.css';
 
-function StepTwo({ prevStep, handleSubmit, errors, handleFormData }) {
+const StepTwo = ({ prevStep, handleFormData, values, errors, handleSubmit }) => {
+    const submitFormData = (e) => {
+      e.preventDefault();
+        prevStep();
+      };
 
-	function handleBack() {
-		prevStep();
-	};
-	return (
-		<div className="signup-main">
-		<div className="sub-main">
-			<div className="sub-main1">
-			<form onSubmit={handleSubmit}>
-				<Text fontSize='4xl' as='b'>Sign Up</Text>
-				<div>
-				<Input placeholder='Email' mt='30px' type="email" onChange={handleFormData("email")} isInvalid={errors?.email} />
-				{!!errors?.email && (
-					<div className="errors">{errors?.email}</div>
-				)}
-				
-				<InputGroup size='md'>
-					<Input
-					mt='20px'
-					mb='20px'
-					pr='4.5rem'
-					type={'password'}
-					placeholder='Enter password'
-					onChange={handleFormData("password")}
-					isInvalid={errors?.password}
-					/>
-				</InputGroup>   
-				{!!errors?.email && (
-					<div className="errors">{errors?.password}</div>
-				)}
-
-				<InputGroup 
-					size='md'>
-					<Input
-					mb='10px'
-					pr='4.5rem'
-					type={'password'}
-					placeholder='Re enter password'
-					onChange={handleFormData("passwordConfirm")}
-					isInvalid={errors?.email}
-					/>
-				</InputGroup>
-				{!!errors?.email && (
-					<div className="errors">{errors?.passwordConfirm}</div>
-				)}
-
-				<Flex> 
-				<Button colorScheme='blue' mt='20px' mb='20px' width='30%' onClick = { handleBack}>Back</Button>
-				<Spacer />
-				<Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit" onClick={handleSubmit}>Signup</Button>
-				</Flex>
-				</div>
-			</form>
+  return (
+    <div className="signup-main">
+      <div className="sub-main">
+        <div className="sub-main1">
+        <form onSubmit={submitFormData}>
+        <Text fontSize='3xl' as='b'>Sign Up</Text>
+		    <div>
+        <Input 
+            mt='40px'
+            name="firstName"
+            defaultValue={values.firstName}
+            type="text"
+            placeholder="First Name"
+            isInvalid={errors?.firstName}
+            onChange={handleFormData("firstName")} />
+            {!!errors?.firstName && (
+              <div className="errors">{errors?.firstName}</div>
+            )}
+        <Input 
+            mt='20px'
+            mb='30px'
+            name="lastName"
+            defaultValue={values.lastName}
+            type="text"
+            placeholder="Last Name"
+            isInvalid={errors?.lastName}
+            onChange={handleFormData("lastName")} />
+            {!!errors?.lastName && (
+              <div className="errors">{errors?.lastName}</div>
+            )}
+          <Flex>
+            <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit">Back</Button>
+            <Spacer />
+				  <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit" onClick={handleSubmit}>Signup</Button>
+          </Flex>
+         <NavLink to='/'><Text color='blue'>Already have a account?</Text></NavLink>
+          </div>
+      </form>
 			</div>
-		</div>
-		</div>
-	);
+</div>
+      </div>
+  );
   }
 
 export default StepTwo;

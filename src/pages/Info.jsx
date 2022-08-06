@@ -2,7 +2,7 @@ import {
 	Button, Flex, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput,
 	NumberInputField, NumberInputStepper, Select, Text
 } from '@chakra-ui/react';
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { profile } from "../firebase";
 import './info.css';
@@ -18,11 +18,16 @@ function Info() {
 	const [level, setLevel] = useState("");
 	const [describe, setDescribe] = useState("");
 	const navigate = useNavigate();
+	const inputAvatarRef = useRef();
 
-	const info = () => {
-		profile(name, studentID, sex, age, birth, hometown, level, describe).then(() => {
-		  navigate('/list');
-		}).catch(error => console.log(error));
+	const info = async () => {
+		const reader = new FileReader();
+		reader.readAsDataURL(inputAvatarRef.current.files[0]);
+		reader.onload = function(e) {
+			profile(name, studentID, sex, age, birth, hometown, level, describe, reader.result).then(() => {
+			  navigate('/grid');
+			}).catch(error => console.log(error));
+		}
 	  };
 
   return (
@@ -31,7 +36,7 @@ function Info() {
         <div className="sub-maini1">
         <Text fontSize='4xl' as='b'>Profile</Text>
 		<div>
-          <Input placeholder='Fullname' mt='30px' type="text" onChange={(e) => setName(e.target.value)} />
+          <Input placeholder='Fullname' mt='10px' type="text" onChange={(e) => setName(e.target.value)} />
 		  <Input placeholder='Student ID' mt='15px' type="text" onChange={(e) => setStudentID(e.target.value)} />
 		  <Flex flex-direction='row' mt='15px'>
 		  <Select placeholder='Sex' mr='15px' onChange={(e) => setSex(e.target.value)}>
@@ -56,10 +61,15 @@ function Info() {
 				/>
 			<Input placeholder='Home Town' mt='15px' type="text" onChange={(e) => setHomeTown(e.target.value)} />
 		  <Input placeholder='Level' mt='15px' type="text" onChange={(e) => setLevel(e.target.value)} />
-		  <Input placeholder='Describe' mt='15px' onChange={(e) => setDescribe(e.target.value)} />
-		  <Link to='/list'>    
+		  <Input placeholder='Describe' mt='15px' mb='15px' onChange={(e) => setDescribe(e.target.value)} />
+		  <div className="image">
+		  <input
+				type="file"
+				name="myImage"
+				ref={inputAvatarRef}
+			/>
+			</div>
         <Button colorScheme='blue' mt='20px' mb='20px' width="100%" onClick={ info } >Add Info</Button>
-		</Link>
 		</div>
 </div>
       </div>

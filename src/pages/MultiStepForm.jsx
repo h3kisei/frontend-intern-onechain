@@ -101,6 +101,16 @@ function MultiStepForm() {
     })
     };
   };
+
+  const handleNext = (e) => {
+    e.preventDefault();
+		const { email, password, passwordConfirm, firstName, lastName} = formData;
+		const {errors, isValid} = formValidation(firstName, lastName, email, password, passwordConfirm);
+		setErrors(errors);
+		if(isValid){
+			nextStep();
+		};
+		};
   
   
     const nextStep = () => {
@@ -121,11 +131,11 @@ function MultiStepForm() {
 switch (step) {
     case 1:
       return (
-        <StepOne nextStep={nextStep} handleFormData={handleInputData} values={formData} />
+        <StepOne nextStep={nextStep} handleFormData={handleInputData} errors={errors} handleNext={handleNext} />
       );
-    case 2:
-      return (
-        <StepTwo prevStep={prevStep} handleFormData={handleInputData} handleSubmit={handleSubmit} errors={errors} />
+      case 2:
+        return (
+        <StepTwo prevStep={prevStep} handleFormData={handleInputData} errors={errors} handleSubmit={handleSubmit} values={formData} />
       );
 
     }

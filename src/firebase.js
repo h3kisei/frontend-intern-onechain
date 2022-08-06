@@ -33,7 +33,7 @@ const registerWithEmailAndPassword = async (email, password, firstName, lastName
     localStorage.setItem('user', registeredUser.user.getIdTokenResult());
   };
 
-const profile = async (name, studentID, sex, age, birth, hometown, level, describe) => {
+const profile = async (name, studentID, sex, age, birth, hometown, level, describe, avatar) => {
   await setDoc(doc(db, "sinhvien", uuidv4()), {
     name,
     studentID,
@@ -43,6 +43,7 @@ const profile = async (name, studentID, sex, age, birth, hometown, level, descri
     hometown,
     level,
     describe,
+    avatar,
   });
 };
 
@@ -64,7 +65,7 @@ const removeDataFromFirebase = async (id) => {
   await deleteDoc(doc(db, "sinhvien", id));
 };
 
-const updateData = async (name, sex, age, birth, hometown, level, describe, id) => {
+const updateData = async (name, sex, age, birth, hometown, level, describe, avatar, id) => {
   await setDoc(doc(db, "sinhvien", id), {
     name,
     sex,
@@ -73,6 +74,7 @@ const updateData = async (name, sex, age, birth, hometown, level, describe, id) 
     hometown,
     level,
     describe,
+    avatar,
   });
 };
 
