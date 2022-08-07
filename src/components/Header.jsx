@@ -1,33 +1,19 @@
-import { HamburgerIcon, RepeatIcon } from '@chakra-ui/icons';
+import { HamburgerIcon } from '@chakra-ui/icons';
 import {
-  AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Avatar, Button, Divider, Drawer,
+  Avatar, Button, Divider, Drawer,
   DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter,
   DrawerHeader,
-  DrawerOverlay, Flex, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer, useDisclosure
+  DrawerOverlay, Flex, IconButton, Spacer, useDisclosure
 } from '@chakra-ui/react';
-import React, { useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from 'react-router-dom';
-import { auth, logout } from "../firebase";
+import React from "react";
+import { Link } from 'react-router-dom';
+import Signout from "../components/Logout.jsx";
 import './header.css';
 
 
 function Header() {
   const btnRef = React.useRef()
-  const navigate = useNavigate();
-  const [user, loading] = useAuthState(auth);
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef()
-
-  const out = () => {
-    logout().then(() => {
-      navigate('/');
-		})
-  };
-  
-  useEffect(() => {
-    if (loading) return;
-  }, [user, loading]);
   
   return (
     <div className="header">
@@ -84,52 +70,10 @@ function Header() {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-   
     <Spacer />
     <div className="logo">O N E C H A I N</div>
     <Spacer />
-    <Menu>
-    <MenuButton
-        mr='15px'
-        aria-label='Options'
-        variant='outline'>
-        <Avatar size='sm' bg='teal.500' float='right' />
-    </MenuButton>
-    <MenuList>
-        <>  
-        <MenuItem icon={<RepeatIcon />} onClick = { onOpen } >
-        Logout
-        </MenuItem>
-
-      <AlertDialog
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-              Logout
-            </AlertDialogHeader>
-
-            <AlertDialogBody>
-              Are you sure? You can't undo this action afterwards.
-            </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
-                Cancel
-              </Button>
-              <Button colorScheme='red' onClick={ out } ml={3}>
-                Logout
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
-    </>
-    </MenuList>
-    </Menu>
+    <Signout />
     </div>
     )
 }
