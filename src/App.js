@@ -7,7 +7,6 @@ import Info from './pages/Info';
 import MultiStepSignup from './pages/MultiStepForm';
 import { ChakraProvider } from '@chakra-ui/react'
 import PrivateRoute from './components/PrivateRoute';
-import Cookies from "js-cookie";
 
 function App() {
   return (
@@ -15,11 +14,22 @@ function App() {
         <div className="App">
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/list" element={<List />} />
-          <Route path="/grid" element={<Grid />} />
-          <Route path="/info" element={<Info />} />
+          <Route path="/info" element={
+          <PrivateRoute navigateTo={'/'}>
+            <Info />
+          </PrivateRoute> 
+          } />
+          <Route path="/list" element={
+          <PrivateRoute navigateTo={'/'}>
+            <List />
+          </PrivateRoute> 
+          } />
+          <Route path="/grid" element={
+          <PrivateRoute navigateTo={'/'}>
+            <Grid />
+          </PrivateRoute> 
+          } />
           <Route path="/signup" element={<MultiStepSignup />} />
-          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
         </div>
     </ChakraProvider>

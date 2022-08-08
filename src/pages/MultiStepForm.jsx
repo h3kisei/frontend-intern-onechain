@@ -104,8 +104,9 @@ function MultiStepForm() {
 
   const handleNext = (e) => {
     e.preventDefault();
-		const { email, password, passwordConfirm, firstName, lastName} = formData;
-		const {errors, isValid} = formValidation(firstName, lastName, email, password, passwordConfirm);
+		const { email, password, passwordConfirm} = formData;
+		const {errors, isValid} = formValidation(email, password, passwordConfirm);
+    console.log(isValid);
 		setErrors(errors);
 		if(isValid){
 			nextStep();

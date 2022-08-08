@@ -90,7 +90,7 @@ function List() {
                 <div>ID: {student.studentID}</div>
                 </Badge>    
             <Box
-                color='gray.500'
+                color='gray.600'
                 fontWeight='semibold'
                 letterSpacing='wide'
                 fontSize='xs'

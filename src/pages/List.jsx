@@ -82,7 +82,7 @@ function List() {
                 <Th>Birthday</Th>
                 <Th>Level</Th>
                 <Th>Home Town</Th>
-                <Th isNumeric>multiply by</Th>
+                <Th isNumeric>Click</Th>
             </Tr>
             </Thead>
             <Tbody>
