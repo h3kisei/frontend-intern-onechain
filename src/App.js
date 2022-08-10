@@ -4,11 +4,11 @@ import { Route, Routes } from "react-router-dom";
 import './App.css';
 import PrivateRoute from './components/PrivateRoute';
 import { auth } from './firebase';
-import Grid from './pages/Grid';
-import Info from './pages/Info';
-import List from './pages/List';
-import LoginPage from './pages/LoginPage';
-import MultiStepSignup from './pages/MultiStepForm';
+import Grid from './screens/Grid';
+import Info from './screens/Info';
+import List from './screens/List';
+import LoginPage from './screens/LoginPage';
+import MultiStepSignup from './screens/MultiStepForm';
 
 function App() {
 

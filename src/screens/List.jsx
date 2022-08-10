@@ -1,5 +1,6 @@
 import { SearchIcon } from '@chakra-ui/icons';
-import { Badge, Box, Button, Flex, IconButton, Input, Select, Spacer, Center } from "@chakra-ui/react";
+import { Button, Flex, IconButton, Input, Select, Spacer, Table, TableContainer, Tbody, Td, Th, Thead, Tr,
+Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import DeleteInfo from "../components/DeleteInfo.jsx";
@@ -28,14 +29,12 @@ function List() {
                 && (filterSex === 'All' || student.sex === filterSex);
         });
         setSinhvien(resultSearch);
-        if (sinhvien === null) {
-            return <Center>No valid student found</Center>;
-        } 
     }
 
     useEffect(() => {
         filterListStudentBy();
     }, [filterSex]);
+
 
     return (
         <div>
@@ -73,50 +72,48 @@ function List() {
         </Flex>
         </div>
         </Flex>
-        <div className="list">
+            {sinhvien.length === 0 && 
+            <Alert status='error'>
+            <AlertIcon />
+            <AlertTitle>Not found!</AlertTitle>
+            <AlertDescription>No valid student found.</AlertDescription>
+            </Alert>}
+        <TableContainer>
+        <Table variant='striped' colorScheme='teal'>
+            <Thead>
+            <Tr>
+                <Th>Fullname</Th>
+                <Th>Student ID</Th>
+                <Th>Gender</Th>
+                <Th>Age</Th>
+                <Th>Birthday</Th>
+                <Th>Level</Th>
+                <Th>Home Town</Th>
+                <Th isNumeric>Click</Th>
+            </Tr>
+            </Thead>
+            <Tbody>
         {sinhvien.length > 0 && sinhvien.map(student => (
-            <Box maxW='sm' borderWidth='1px' borderRadius='lg' height='240px' width='310px' m='20px' key={student.id}>
-            <Box p='6'>
-            <Flex>
-            <img src={ student.avatar } />
-            <Flex
-                justifyContent='center'
-                mt='1'
-                fontWeight='semibold'
-                lineHeight='tight'
-                mb='15px'
-                flexDirection="column"
-            >
-                <div>{student.name}</div>
-                <Badge mt='6px' mb='6px' borderRadius='full' px='2' colorScheme='teal' key={student.id}>
-                <div>ID: {student.studentID}</div>
-                </Badge>    
-            <Box
-                color='gray.600'
-                fontWeight='semibold'
-                letterSpacing='wide'
-                fontSize='xs'
-            >
-                <div>Gender: {student.sex}</div>
-                <div>Age: {student.age}</div>
-                <div>Majors: {student.level}</div>
-                <div>Hometown: {student.hometown}</div>
-            </Box>      
-            </Flex>
-            </Flex>
-        <Box display='flex' mt='2' alignItems='flex-end' justifyContent='center'>
-        <ModalInfo name={student.name} studentID={student.studentID} sex={student.sex} age={student.age} level={student.level} describe={student.describe} birth={student.birth} hometown={student.hometown} avatar={student.avatar}/>
-        <UpdateInfo student={student} />
-        <DeleteInfo student={student} />
-            <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-            </Box>
-        </Box>
-        </Box>
-    </Box>
+            <Tr>
+                <Td>{student.name}</Td>
+                <Td>{student.studentID}</Td>
+                <Td>{student.sex}</Td>
+                <Td>{student.age}</Td>
+                <Td>{student.birth}</Td>
+                <Td>{student.level}</Td>
+                <Td>{student.hometown}</Td>
+                <Td isNumeric>
+                <ModalInfo name={student.name} studentID={student.studentID} sex={student.sex} age={student.age} level={student.level} describe={student.describe} birth={student.birth} hometown={student.hometown} />
+                <UpdateInfo student={student} />
+                <DeleteInfo student={student} />
+                </Td>
+            </Tr>
             ))}
+                </Tbody>
+            </Table>
+            </TableContainer>
         </div>
         </div>
-    </div>
     );
 }
 

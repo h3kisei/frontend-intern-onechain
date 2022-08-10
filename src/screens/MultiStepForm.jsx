@@ -13,7 +13,7 @@ function MultiStepForm() {
     firstName: "",
     lastName: "",
     // email: "",
-    password: "",
+    // password: "",
     passwordConfirm: "",
   })
   const [errors, setErrors] = useState({
@@ -47,12 +47,6 @@ function MultiStepForm() {
         passwordConfirm: "PasswordConfirm is required!"
       }
     } 
-    if (passwordConfirm !== password) {
-      errors = {
-        ...errors,
-        passwordConfirm: "PasswordConfirm is invalid!"
-      }
-    } 
     for (const key in errors) {
       if (errors[key]) return {
         errors,
@@ -84,6 +78,7 @@ function MultiStepForm() {
 		const { email, password, passwordConfirm} = formData;
 		const {errors, isValid} = formValidation(email, password, passwordConfirm);
 		setErrors(errors);
+    console.log(isValid);
 		if(isValid){
 			nextStep();
 		};

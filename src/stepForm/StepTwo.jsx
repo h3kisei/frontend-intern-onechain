@@ -1,6 +1,6 @@
 import { Button, Flex, Input, Text, Spacer } from '@chakra-ui/react';
 import React from "react";
-import '../pages/styles.css';
+import '../screens/styles.css';
 
 const StepTwo = ({ prevStep, handleFormData, handleSubmit }) => {
     const handlePrev = (e) => {

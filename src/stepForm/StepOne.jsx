@@ -1,6 +1,6 @@
 import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import '../pages/styles.css';
+import '../screens/styles.css';
 import { NavLink } from 'react-router-dom';
 
 function StepOne({ handleNext, handleSubmit, errors, handleFormData }) {

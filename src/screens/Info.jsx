@@ -130,9 +130,14 @@ function Info() {
 		  {!!errors?.name && (
 					<div className="errors">{errors?.name}</div>
 				)}
-		  <Input placeholder='Student ID' mt='15px' type="text" onChange={(e) => setStudentID(e.target.value)} />
+		  <Input placeholder='Student ID' mt='15px' type="text" onChange={(e) => setStudentID(e.target.value)} 
+			  isInvalid={errors?.studentID}
+		  />
+		  {!!errors?.studentID && (
+					<div className="errors">{errors?.studentID}</div>
+				)}
 		  <Flex flex-direction='row' mt='15px'>
-		  <Select placeholder='Sex' mr='15px' onChange={(e) => setSex(e.target.value)}>
+		  <Select placeholder='Sex' mr='15px' onChange={(e) => setSex(e.target.value)} isInvalid={errors?.sex}>
 			<option value='Male'>Male</option>
 			<option value='Female'>Female</option>
 			</Select>
@@ -144,17 +149,38 @@ function Info() {
 				</NumberInputStepper>
 			</NumberInput>
 			</Flex>
+			{!!errors?.sex && (
+					<div className="errors">{errors?.sex}</div>
+				)}
 			<Input
 				mt='15px'			
 				placeholder="Select Date"
 				size="md"
 				backgroundColor="#ffffff"
 				type="date"
+				isInvalid={errors?.birth}
 				onChange={(e) => setBirth(e.target.value)}
 				/>
-			<Input placeholder='Home Town' mt='15px' type="text" onChange={(e) => setHomeTown(e.target.value)} />
-		  <Input placeholder='Level' mt='15px' type="text" onChange={(e) => setLevel(e.target.value)} />
-		  <Input placeholder='Describe' mt='15px' mb='15px' onChange={(e) => setDescribe(e.target.value)} />
+				{!!errors?.birth && (
+					<div className="errors">{errors?.birth}</div>
+				)}
+			<Input placeholder='Home Town' mt='15px' type="text" onChange={(e) => setHomeTown(e.target.value)} 
+			isInvalid={errors?.hometown} />
+			{!!errors?.hometown && (
+					<div className="errors">{errors?.hometown}</div>
+				)}
+		  <Input placeholder='Level' mt='15px' type="text" onChange={(e) => setLevel(e.target.value)} 
+			  isInvalid={errors?.level}
+		  />
+		  {!!errors?.level && (
+					<div className="errors">{errors?.level}</div>
+				)}
+		  <Input placeholder='Describe' mt='15px' mb='15px' onChange={(e) => setDescribe(e.target.value)} 
+			  isInvalid={errors?.describe}
+		  />
+		  {!!errors?.describe && (
+					<div className="errors">{errors?.describe}</div>
+				)}
 		  <div className="image">
 		  <input
 				type="file"
