@@ -3,46 +3,48 @@ import React, { useState } from 'react';
 import '../screens/styles.css';
 import { NavLink } from 'react-router-dom';
 
-function StepOne({ handleNext, handleSubmit, errors, handleFormData }) {
-	const [email, setEmail] = useState({
-		value: "",
-		hasError: false,
-	  })
-	const [password, setPassword] = useState({
-	value: "",
-	hasError: false,
-	})
-	const changeHandler1 = e => {
-		// console.log("value changed: ", e.target.value)
-		const emailValue = e.target.value.trim().toLowerCase()
-		let hasErrorEmail = false
+function StepOne({ handleSubmit, handleFormData, nextStep }) {
+	const {email, setEmail} = useState("");
+	const [hasError, setHasError] = useState({
+		  email: null,
+		});
+	const handleBlurEmail = () => {
+		let hasError = false
 		if (
-		  !/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(
-			emailValue
+		  !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
+			email
 		  )
 		) {
-		  hasErrorEmail = true;
+		  hasError = true;
 		}
-		setEmail(currentValue => ({
-		  ...currentValue,
-		  value: e.target.value,
-		  hasErrorEmail,
-		}))
+		return {
+			hasError,
+			isValid: true,
+		  }
 	  }
 
-	const changeHandler2 = e => {
-	// console.log("value changed: ", e.target.value)
-	const passwordValue = e.target.value.trim().toLowerCase()
-	let hasErrorPassword = false
-	if (6 < passwordValue.length && passwordValue.length < 10) {
-		hasErrorPassword = true;
-	}
-	setPassword(currentValue => ({
-		...currentValue,
-		value: e.target.value,
-		hasErrorPassword,
-	}))
-	}
+	// const changeHandler2 = e => {
+	// const passwordValue = e.target.value.trim().toLowerCase()
+	// let hasError = false
+	// if (6 < passwordValue.length && passwordValue.length < 10) {
+	// 	hasError = true;
+	// }
+	// setPassword(currentValue => ({
+	// 	...currentValue,
+	// 	value: e.target.value,
+	// 	hasError,
+	// }))
+	// }
+
+	const handleNext = (e) => {
+		e.preventDefault();
+		const {hasError, isValid} = handleBlurEmail();
+		setHasError(hasError);
+		console.log(isValid);
+			if(isValid){
+				nextStep();
+			};
+			};
 	
 	return (
 		<div className="signup-main">
@@ -51,8 +53,12 @@ function StepOne({ handleNext, handleSubmit, errors, handleFormData }) {
 			<form onSubmit={handleSubmit}>
 				<Text fontSize='4xl' as='b'>Sign Up</Text>
 				<div>
-				<Input placeholder='Email' mt='30px' type="email" onBlur={ changeHandler1 } />
-				{email.hasErrorEmail && <div className="err">Please enter a valid email</div>}
+				<Input placeholder='Email' mt='30px' type="email" 
+				onChange={(e) => {setEmail(e.target.value)}} 
+				onBlur={ handleBlurEmail } 
+				isInvalid={hasError.email}
+				/>
+				{hasError.email && <div className="err">Please enter a valid email</div>}
 				
 				<InputGroup size='md'>
 					<Input
@@ -61,10 +67,9 @@ function StepOne({ handleNext, handleSubmit, errors, handleFormData }) {
 					pr='4.5rem'
 					type={'password'}
 					placeholder='Enter password'
-					onBlur={ changeHandler2 }
 					/>
 				</InputGroup>   
-				{password.hasErrorPassword && <div className="err">Password must be more than 6 characters and cannot exceed more than 10 characters</div>}
+				{/* {password.hasError && <div className="err">Password must be more than 6 characters and cannot exceed more than 10 characters</div>} */}
 
 				<InputGroup 
 					size='md'>
@@ -74,12 +79,8 @@ function StepOne({ handleNext, handleSubmit, errors, handleFormData }) {
 					type={'password'}
 					placeholder='Re enter password'
 					onChange={handleFormData("passwordConfirm")}
-					isInvalid={errors?.passwordConfirm}
 					/>
 				</InputGroup>
-				{!!errors?.passwordConfirm && (
-					<div className="errors">{errors?.passwordConfirm}</div>
-				)}
 
 				<Flex justifyContent='flex-end'> 
 				<Button colorScheme='blue' mt='20px' mb='10px' width='30%' onClick = { handleNext }>Next</Button>

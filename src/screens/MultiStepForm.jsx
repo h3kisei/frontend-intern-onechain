@@ -12,53 +12,53 @@ function MultiStepForm() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    // email: "",
+    email: "",
     // password: "",
     passwordConfirm: "",
   })
-  const [errors, setErrors] = useState({
-    email: null,
-    password: null,
-    passwordConfirm: null
-  });
+  // const [errors, setErrors] = useState({
+  //   email: null,
+  //   password: null,
+  //   passwordConfirm: null
+  // });
   
-  const formValidation = (email, password, passwordConfirm) => {
-    let errors = {
-      email: null,
-      password: null,
-      passwordConfirm: null,
-    };
+  // const formValidation = (email, password, passwordConfirm) => {
+  //   let errors = {
+  //     email: null,
+  //     password: null,
+  //     passwordConfirm: null,
+  //   };
 
-    if (!email) {
-      errors = {
-        ...errors,
-        email: "Email is required!"
-      }
-    }
-    if (!password) {
-      errors = {
-        ...errors,
-        password: "Password is required!"
-      }
-    };
-    if (!passwordConfirm) {
-      errors = {
-        ...errors,
-        passwordConfirm: "PasswordConfirm is required!"
-      }
-    } 
-    for (const key in errors) {
-      if (errors[key]) return {
-        errors,
-        isValid: false,
-      }
-    }
-    return {
-      errors,
-      isValid: true,
-    }
+  //   if (!email) {
+  //     errors = {
+  //       ...errors,
+  //       email: "Email is required!"
+  //     }
+  //   }
+  //   if (!password) {
+  //     errors = {
+  //       ...errors,
+  //       password: "Password is required!"
+  //     }
+  //   };
+  //   if (!passwordConfirm) {
+  //     errors = {
+  //       ...errors,
+  //       passwordConfirm: "PasswordConfirm is required!"
+  //     }
+  //   } 
+  //   for (const key in errors) {
+  //     if (errors[key]) return {
+  //       errors,
+  //       isValid: false,
+  //     }
+  //   }
+  //   return {
+  //     errors,
+  //     isValid: true,
+  //   }
     
-  };
+  // };
   
   useEffect(() => {
     if (loading) return;
@@ -72,17 +72,6 @@ function MultiStepForm() {
       navigate('/');
     })
     };
-
-  const handleNext = (e) => {
-    e.preventDefault();
-		const { email, password, passwordConfirm} = formData;
-		const {errors, isValid} = formValidation(email, password, passwordConfirm);
-		setErrors(errors);
-    console.log(isValid);
-		if(isValid){
-			nextStep();
-		};
-		};
   
   
     const nextStep = () => {
@@ -103,11 +92,11 @@ function MultiStepForm() {
 switch (step) {
     case 1:
       return (
-        <StepOne nextStep={nextStep} handleFormData={handleInputData} errors={errors} handleNext={handleNext} />
+        <StepOne nextStep={nextStep} handleFormData={handleInputData} />
       );
       case 2:
         return (
-        <StepTwo prevStep={prevStep} handleFormData={handleInputData} errors={errors} handleSubmit={handleSubmit} values={formData} />
+        <StepTwo prevStep={prevStep} handleFormData={handleInputData} handleSubmit={handleSubmit} values={formData} />
       );
 
     }

@@ -37,7 +37,6 @@ function Header() {
           <DrawerHeader bg='#b5f5ec'>O N E C H A I N</DrawerHeader>
           <Divider />
           <Flex mt='15px' mb='10px' justifyContent='center' alignItems='center'>
-          <Avatar size='sm' bg='teal.500' float='right' mr='10px' />
           Huy Hoang
           </Flex>
         </div>
