@@ -1,10 +1,9 @@
 import { Button, Flex, Input, Text, Spacer } from '@chakra-ui/react';
 import React from "react";
-import { NavLink } from 'react-router-dom';
 import '../pages/styles.css';
 
-const StepTwo = ({ prevStep, handleFormData, values, errors, handleSubmit }) => {
-    const submitFormData = (e) => {
+const StepTwo = ({ prevStep, handleFormData, handleSubmit }) => {
+    const handlePrev = (e) => {
       e.preventDefault();
         prevStep();
       };
@@ -13,38 +12,28 @@ const StepTwo = ({ prevStep, handleFormData, values, errors, handleSubmit }) => 
     <div className="signup-main">
       <div className="sub-main">
         <div className="sub-main1">
-        <form onSubmit={submitFormData}>
+        <form onSubmit={handleSubmit}>
         <Text fontSize='3xl' as='b'>Sign Up</Text>
 		    <div>
         <Input 
             mt='40px'
             name="firstName"
-            defaultValue={values.firstName}
             type="text"
             placeholder="First Name"
-            isInvalid={errors?.firstName}
             onChange={handleFormData("firstName")} />
-            {!!errors?.firstName && (
-              <div className="errors">{errors?.firstName}</div>
-            )}
         <Input 
             mt='20px'
             mb='30px'
             name="lastName"
-            defaultValue={values.lastName}
             type="text"
             placeholder="Last Name"
-            isInvalid={errors?.lastName}
             onChange={handleFormData("lastName")} />
-            {!!errors?.lastName && (
-              <div className="errors">{errors?.lastName}</div>
-            )}
           <Flex>
-            <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit">Back</Button>
+            <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit" onClick = { handlePrev }>Back</Button>
             <Spacer />
 				  <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit" onClick={handleSubmit}>Signup</Button>
           </Flex>
-         <NavLink to='/'><Text color='blue'>Already have a account?</Text></NavLink>
+         
           </div>
       </form>
 			</div>

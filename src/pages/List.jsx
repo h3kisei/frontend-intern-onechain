@@ -1,5 +1,5 @@
 import { SearchIcon } from '@chakra-ui/icons';
-import { Table, TableContainer, Tr, Td, Th, Thead, Tbody, Button, Flex, IconButton, Input, Select, Spacer } from "@chakra-ui/react";
+import { Button, Flex, IconButton, Input, Select, Spacer, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import DeleteInfo from "../components/DeleteInfo.jsx";
@@ -39,9 +39,9 @@ function List() {
         <div>
         <Header />
         <div>
-        <Flex mt='15px' ml='30px' mr='30px'>
+        <Flex mt='15px' ml='20px' mr='20px'>
         <Link to='/list'>
-        <Button colorScheme='blue' width="110px" mr='20px'>List View</Button>
+        <Button colorScheme='blue' width="110px" mr='10px'>List View</Button>
         </Link>
         <Link to='/grid'>
         <Button colorScheme='blue' width="110px">Grid View</Button>

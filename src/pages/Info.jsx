@@ -19,14 +19,102 @@ function Info() {
 	const [describe, setDescribe] = useState("");
 	const navigate = useNavigate();
 	const inputAvatarRef = useRef();
+	const [errors, setErrors] = useState({
+		name: null,
+		studentID: null,
+		sex: null,
+		age: null,
+		birth: null,
+		hometown: null,
+		level: null,
+		describe: null,
+	  });
+	  
+	  const formValidation = (name, studentID, sex, age, birth, hometown, level, describe) => {
+		let errors = {
+		  name: null,
+		  studentID: null,
+		  sex: null,
+		  age: null,
+		  birth: null,
+		  hometown: null,
+		  level: null,
+		  describe: null,
+		};
+	
+		if (!name) {
+		  errors = {
+			...errors,
+			name: "Name is required!"
+		  }
+		}
+		if (!studentID) {
+		  errors = {
+			...errors,
+			studentID: "StudentID is required!"
+		  }
+		};
+		if (!sex) {
+		  errors = {
+			...errors,
+			sex: "Sex is required!"
+		  }
+		} 
+		if (!age) {
+			errors = {
+			  ...errors,
+			  age: "Age is required!"
+			}
+		  } 
+		  if (!birth) {
+			errors = {
+			  ...errors,
+			  birth: "Birth is required!"
+			}
+		  } 
+		  if (!hometown) {
+			errors = {
+			  ...errors,
+			  hometown: "Hometown is required!"
+			}
+		  }
+		  if (!level) {
+			errors = {
+			  ...errors,
+			  level: "Level is required!"
+			}
+		  } 
+		  if (!describe) {
+			errors = {
+			  ...errors,
+			  describe: "Describe is required!"
+			}
+		  }
+		for (const key in errors) {
+		  if (errors[key]) return {
+			errors,
+			isValid: false,
+		  }
+		}
+		return {
+		  errors,
+		  isValid: true,
+		}
+		
+	  };
 
 	const info = async () => {
 		const reader = new FileReader();
 		reader.readAsDataURL(inputAvatarRef.current.files[0]);
 		reader.onload = function(e) {
+			e.preventDefault();
+			const {errors, isValid} = formValidation(name, studentID, sex, age, birth, hometown, level, describe);
+			setErrors(errors);
+			if(isValid){
 			profile(name, studentID, sex, age, birth, hometown, level, describe, reader.result).then(() => {
 			  navigate('/grid');
 			}).catch(error => console.log(error));
+		};
 		}
 	  };
 
@@ -36,7 +124,12 @@ function Info() {
         <div className="sub-maini1">
         <Text fontSize='4xl' as='b'>Profile</Text>
 		<div>
-          <Input placeholder='Fullname' mt='10px' type="text" onChange={(e) => setName(e.target.value)} />
+          <Input placeholder='Fullname' mt='10px' type="text" onChange={(e) => setName(e.target.value)} 
+			  isInvalid={errors?.name}
+		  />
+		  {!!errors?.name && (
+					<div className="errors">{errors?.name}</div>
+				)}
 		  <Input placeholder='Student ID' mt='15px' type="text" onChange={(e) => setStudentID(e.target.value)} />
 		  <Flex flex-direction='row' mt='15px'>
 		  <Select placeholder='Sex' mr='15px' onChange={(e) => setSex(e.target.value)}>

@@ -1,14 +1,45 @@
+import { ChakraProvider } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { Route, Routes } from "react-router-dom";
 import './App.css';
-import { Route, Routes, Navigate } from "react-router-dom";
-import LoginPage from './pages/LoginPage';
-import Grid from './pages/Grid';
-import List from './pages/List';
-import Info from './pages/Info';
-import MultiStepSignup from './pages/MultiStepForm';
-import { ChakraProvider } from '@chakra-ui/react'
 import PrivateRoute from './components/PrivateRoute';
+import { auth } from './firebase';
+import Grid from './pages/Grid';
+import Info from './pages/Info';
+import List from './pages/List';
+import LoginPage from './pages/LoginPage';
+import MultiStepSignup from './pages/MultiStepForm';
 
 function App() {
+
+  useEffect(() => {
+    let sessionTimeout = null;
+    auth.onAuthStateChanged((user) => {
+      if (user == null) {
+        //User is logged out
+        sessionTimeout && clearTimeout(sessionTimeout);
+        sessionTimeout = null;
+      } else {
+        //User is logged in
+        user.getIdTokenResult().then((idTokenResult) => {
+          const authTime = idTokenResult.claims.auth_time * 1000;
+          const sessionDuration = 1000 * 60 * 2; //1 hour to expire
+          const millisecondsUntilExpiration = sessionDuration - (Date.now() - authTime);
+          console.log(`User will be logged out after ${millisecondsUntilExpiration / 1000} seconds`);
+          sessionTimeout = setTimeout(() => {
+            auth.signOut().then(() => {
+              console.log('User is logged out');
+            });
+          }, millisecondsUntilExpiration);
+        })
+      }
+    });
+
+    return () => {
+      sessionTimeout && clearTimeout(sessionTimeout);
+    }
+  }, []); 
+  
   return (
     <ChakraProvider>
         <div className="App">

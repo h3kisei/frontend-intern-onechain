@@ -12,39 +12,23 @@ function MultiStepForm() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    // email: "",
     password: "",
     passwordConfirm: "",
   })
   const [errors, setErrors] = useState({
-    firstName: null,
-    lastName: null,
     email: null,
     password: null,
     passwordConfirm: null
   });
   
-  const formValidation = (firstName, lastName, email, password, passwordConfirm) => {
+  const formValidation = (email, password, passwordConfirm) => {
     let errors = {
-      firstName: null,
-      lastName: null,
       email: null,
       password: null,
       passwordConfirm: null,
     };
-    
-    if (!firstName) {
-      errors = {
-        ...errors,
-        firstName: "FirstName is required!"
-      }
-    }
-    if (!lastName) {
-      errors = {
-        ...errors,
-        lastName: "LastName is required!"
-      }
-    }
+
     if (!email) {
       errors = {
         ...errors,
@@ -57,9 +41,6 @@ function MultiStepForm() {
         password: "Password is required!"
       }
     };
-    if (6 < password.length && password.length < 10) {
-      errors = "Password must be more than 6 characters and cannot exceed more than 10 characters";
-    }
     if (!passwordConfirm) {
       errors = {
         ...errors,
@@ -91,22 +72,17 @@ function MultiStepForm() {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password, passwordConfirm, firstName, lastName} = formData;
-    const {errors, isValid} = formValidation(firstName, lastName, email, password, passwordConfirm);
-    setErrors(errors);
-    if(isValid){
+    const { email, password, firstName, lastName} = formData;
       registerWithEmailAndPassword(email, password, firstName, lastName).then((res) => {
       console.log(res);
       navigate('/');
     })
     };
-  };
 
   const handleNext = (e) => {
     e.preventDefault();
 		const { email, password, passwordConfirm} = formData;
 		const {errors, isValid} = formValidation(email, password, passwordConfirm);
-    console.log(isValid);
 		setErrors(errors);
 		if(isValid){
 			nextStep();
