@@ -9,56 +9,49 @@ function MultiStepForm() {
   const [step, setStep] = useState(1);
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    // password: "",
-    passwordConfirm: "",
-  })
-  // const [errors, setErrors] = useState({
-  //   email: null,
-  //   password: null,
-  //   passwordConfirm: null
-  // });
-  
-  // const formValidation = (email, password, passwordConfirm) => {
-  //   let errors = {
-  //     email: null,
-  //     password: null,
-  //     passwordConfirm: null,
-  //   };
+  const [email, setEmail] = useState({
+		value: "",
+		hasError: false,
+	});
+	const [password, setPassword] = useState({
+		value: "",
+		hasError: false,
+	});
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+  }
+  const handleChangePassword = (e) => {
+    setPassword({...password, value: e.target.value});
+  }
+	const handleBlurEmail = () => {
+		let hasError = false;
+		if (
+		  !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
+			email
+		  )
+		) {
+		  hasError = true;
+		}
+		setEmail({
+			...email,
+			hasError,
+		})
+	  }
 
-  //   if (!email) {
-  //     errors = {
-  //       ...errors,
-  //       email: "Email is required!"
-  //     }
-  //   }
-  //   if (!password) {
-  //     errors = {
-  //       ...errors,
-  //       password: "Password is required!"
-  //     }
-  //   };
-  //   if (!passwordConfirm) {
-  //     errors = {
-  //       ...errors,
-  //       passwordConfirm: "PasswordConfirm is required!"
-  //     }
-  //   } 
-  //   for (const key in errors) {
-  //     if (errors[key]) return {
-  //       errors,
-  //       isValid: false,
-  //     }
-  //   }
-  //   return {
-  //     errors,
-  //     isValid: true,
-  //   }
-    
-  // };
+	  const handleBlurPassword = () => {
+		let hasError = false;
+		if ( 6 > password.value.length ) {
+		  hasError = true;
+		}
+		if ( password.value.length > 10 ) {
+			hasError = true;
+		  }
+		setPassword({
+			...password,
+			hasError,
+		  })
+	  }
+
   
   useEffect(() => {
     if (loading) return;
@@ -66,7 +59,8 @@ function MultiStepForm() {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password, firstName, lastName} = formData;
+      const { email } = handleChangeEmail;
+      const { password } = handleChangePassword;
       registerWithEmailAndPassword(email, password, firstName, lastName).then((res) => {
       console.log(res);
       navigate('/');
@@ -82,21 +76,19 @@ function MultiStepForm() {
       setStep(step - 1);
     };
 
-    const handleInputData = input => e => {
-      setFormData({
-        ...formData,
-        [input]: e.target.value,
-      })
-    }
-
 switch (step) {
     case 1:
       return (
-        <StepOne nextStep={nextStep} handleFormData={handleInputData} />
+        <StepOne nextStep={nextStep} 
+        onChangeEmail={handleChangeEmail} 
+        onChangePassword={ handleChangePassword } 
+        onBlurEmail={handleBlurEmail}
+        onBlurPassword={handleBlurPassword}
+        />
       );
       case 2:
         return (
-        <StepTwo prevStep={prevStep} handleFormData={handleInputData} handleSubmit={handleSubmit} values={formData} />
+        <StepTwo prevStep={prevStep} handleSubmit={handleSubmit} />
       );
 
     }

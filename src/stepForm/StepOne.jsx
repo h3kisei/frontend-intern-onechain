@@ -1,49 +1,12 @@
 import { Button, Flex, Input, InputGroup, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import '../screens/styles.css';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
+import '../screens/styles.css';
 
-function StepOne({ handleSubmit, handleFormData, nextStep }) {
-	const {email, setEmail} = useState("");
-	const [hasError, setHasError] = useState({
-		  email: null,
-		});
-	const handleBlurEmail = () => {
-		let hasError = false
-		if (
-		  !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(
-			email
-		  )
-		) {
-		  hasError = true;
-		}
-		return {
-			hasError,
-			isValid: true,
-		  }
-	  }
-
-	// const changeHandler2 = e => {
-	// const passwordValue = e.target.value.trim().toLowerCase()
-	// let hasError = false
-	// if (6 < passwordValue.length && passwordValue.length < 10) {
-	// 	hasError = true;
-	// }
-	// setPassword(currentValue => ({
-	// 	...currentValue,
-	// 	value: e.target.value,
-	// 	hasError,
-	// }))
-	// }
-
+function StepOne({ handleSubmit, nextStep, onChangeEmail, onChangePassword }) {
 	const handleNext = (e) => {
 		e.preventDefault();
-		const {hasError, isValid} = handleBlurEmail();
-		setHasError(hasError);
-		console.log(isValid);
-			if(isValid){
-				nextStep();
-			};
+		nextStep();
 			};
 	
 	return (
@@ -54,11 +17,11 @@ function StepOne({ handleSubmit, handleFormData, nextStep }) {
 				<Text fontSize='4xl' as='b'>Sign Up</Text>
 				<div>
 				<Input placeholder='Email' mt='30px' type="email" 
-				onChange={(e) => {setEmail(e.target.value)}} 
+				value={email.value}
+				onChange={ onChangeEmail } 
 				onBlur={ handleBlurEmail } 
-				isInvalid={hasError.email}
 				/>
-				{hasError.email && <div className="err">Please enter a valid email</div>}
+				{email.hasError && <div className="err">Please enter a valid email</div>}
 				
 				<InputGroup size='md'>
 					<Input
@@ -67,9 +30,11 @@ function StepOne({ handleSubmit, handleFormData, nextStep }) {
 					pr='4.5rem'
 					type={'password'}
 					placeholder='Enter password'
+					onChange={ onChangePassword } 
+					onBlur={ handleBlurPassword }
 					/>
 				</InputGroup>   
-				{/* {password.hasError && <div className="err">Password must be more than 6 characters and cannot exceed more than 10 characters</div>} */}
+				{password.hasError && <div className="err">Password must be more than 6 characters and cannot exceed more than 10 characters</div>}
 
 				<InputGroup 
 					size='md'>

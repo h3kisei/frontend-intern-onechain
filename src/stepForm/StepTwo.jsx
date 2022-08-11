@@ -1,13 +1,15 @@
 import { Button, Flex, Input, Text, Spacer } from '@chakra-ui/react';
-import React from "react";
+import React, { useState } from "react";
 import '../screens/styles.css';
 
-const StepTwo = ({ prevStep, handleFormData, handleSubmit }) => {
-    const handlePrev = (e) => {
-      e.preventDefault();
-        prevStep();
-      };
 
+function StepTwo ({ prevStep, handleFormData, handleSubmit }) {
+  const handlePrev = (e) => {
+    e.preventDefault();
+    prevStep();
+  };
+
+  
   return (
     <div className="signup-main">
       <div className="sub-main">
@@ -20,14 +22,18 @@ const StepTwo = ({ prevStep, handleFormData, handleSubmit }) => {
             name="firstName"
             type="text"
             placeholder="First Name"
-            onChange={handleFormData("firstName")} />
+            onChange={(e) => {setFirstName({...firstName, value: e.target.value})}} 
+					  onBlur={ handleBlurFirstName } />
+            {firstName.hasError && <div className="err">Firstname is required!</div>}
         <Input 
             mt='20px'
             mb='30px'
             name="lastName"
             type="text"
             placeholder="Last Name"
-            onChange={handleFormData("lastName")} />
+            onChange={(e) => {setLastName({...lastName, value: e.target.value})}} 
+					  onBlur={ handleBlurLastName } />\
+          {lastName.hasError && <div className="err">Lastname is required!</div>}
           <Flex>
             <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit" onClick = { handlePrev }>Back</Button>
             <Spacer />
