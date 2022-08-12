@@ -3,7 +3,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import '../screens/styles.css';
 
-function StepOne({ handleSubmit, nextStep, onChangeEmail, onChangePassword }) {
+function StepOne({nextStep, onChangeEmail, onChangePassword, onChangePasswordConfirm, onBlurEmail, onBlurPassword,
+	onBlurPasswordConfirm, hasErrorEmail, hasErrorPassword, hasErrorPasswordConfirm }) {
 	const handleNext = (e) => {
 		e.preventDefault();
 		nextStep();
@@ -13,15 +14,14 @@ function StepOne({ handleSubmit, nextStep, onChangeEmail, onChangePassword }) {
 		<div className="signup-main">
 		<div className="sub-main">
 			<div className="sub-main1">
-			<form onSubmit={handleSubmit}>
+			<form>
 				<Text fontSize='4xl' as='b'>Sign Up</Text>
 				<div>
 				<Input placeholder='Email' mt='30px' type="email" 
-				value={email.value}
 				onChange={ onChangeEmail } 
-				onBlur={ handleBlurEmail } 
+				onBlur={ onBlurEmail } 
 				/>
-				{email.hasError && <div className="err">Please enter a valid email</div>}
+				{hasErrorEmail && <div className="err">Please enter a valid email</div>}
 				
 				<InputGroup size='md'>
 					<Input
@@ -31,10 +31,10 @@ function StepOne({ handleSubmit, nextStep, onChangeEmail, onChangePassword }) {
 					type={'password'}
 					placeholder='Enter password'
 					onChange={ onChangePassword } 
-					onBlur={ handleBlurPassword }
+					onBlur={ onBlurPassword }
 					/>
 				</InputGroup>   
-				{password.hasError && <div className="err">Password must be more than 6 characters and cannot exceed more than 10 characters</div>}
+				{hasErrorPassword && <div className="err">Password must be more than 6 characters and cannot exceed more than 10 characters</div>}
 
 				<InputGroup 
 					size='md'>
@@ -43,8 +43,10 @@ function StepOne({ handleSubmit, nextStep, onChangeEmail, onChangePassword }) {
 					pr='4.5rem'
 					type={'password'}
 					placeholder='Re enter password'
-					onChange={handleFormData("passwordConfirm")}
-					/>
+					onChange={ onChangePasswordConfirm}
+					onBlur={ onBlurPasswordConfirm } 
+				/>
+				{hasErrorPasswordConfirm && <div className="err">Passwordconfirm is invalid!</div>}
 				</InputGroup>
 
 				<Flex justifyContent='flex-end'> 

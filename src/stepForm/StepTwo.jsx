@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import '../screens/styles.css';
 
 
-function StepTwo ({ prevStep, handleFormData, handleSubmit }) {
+function StepTwo ({ prevStep, handleSubmit, onChangeFirstName, onChangeLastName, onBlurFirstName, onBlurLastName,
+  hasErrorFirstName, hasErrorLastName }) {
   const handlePrev = (e) => {
     e.preventDefault();
     prevStep();
   };
-
   
   return (
     <div className="signup-main">
@@ -22,18 +22,18 @@ function StepTwo ({ prevStep, handleFormData, handleSubmit }) {
             name="firstName"
             type="text"
             placeholder="First Name"
-            onChange={(e) => {setFirstName({...firstName, value: e.target.value})}} 
-					  onBlur={ handleBlurFirstName } />
-            {firstName.hasError && <div className="err">Firstname is required!</div>}
+            onChange={onChangeFirstName} 
+					  onBlur={ onBlurFirstName } />
+            {hasErrorFirstName && <div className="err">Firstname is required!</div>}
         <Input 
             mt='20px'
             mb='30px'
             name="lastName"
             type="text"
             placeholder="Last Name"
-            onChange={(e) => {setLastName({...lastName, value: e.target.value})}} 
-					  onBlur={ handleBlurLastName } />\
-          {lastName.hasError && <div className="err">Lastname is required!</div>}
+            onChange={ onChangeLastName} 
+					  onBlur={ onBlurLastName } />
+          {hasErrorLastName && <div className="err">Lastname is required!</div>}
           <Flex>
             <Button colorScheme='blue' mt='20px' mb='20px' width='30%' type="submit" onClick = { handlePrev }>Back</Button>
             <Spacer />
