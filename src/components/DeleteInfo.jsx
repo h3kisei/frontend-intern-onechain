@@ -1,30 +1,39 @@
-import { IconButton, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialog, 
-AlertDialogHeader, AlertDialogOverlay, useDisclosure, Button } from "@chakra-ui/react";
+import {
+  IconButton,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialog,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  useDisclosure,
+  Button,
+} from "@chakra-ui/react";
 import React from "react";
 import { removeDataFromFirebase } from "../firebase";
 import { DeleteIcon } from "@chakra-ui/icons";
-  
+
 function DeleteInfo({ student }) {
-        const { id } = student;
-        const { isOpen, onOpen, onClose } = useDisclosure()
-        const cancelRef = React.useRef()
+  const { id } = student;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef();
 
-        const handleDeleteStudent = () => {
-          removeDataFromFirebase( id ).then(() => {
-            onClose();
-          });
-        }
+  const handleDeleteStudent = () => {
+    removeDataFromFirebase(id).then(() => {
+      onClose();
+    });
+  };
 
-      return (
-        <>  
-        <IconButton
-          mr='20px'
-          variant='outline'
-          colorScheme='teal'
-          aria-label='delete'
-          icon={<DeleteIcon />}
-          onClick={ onOpen }
-        />
+  return (
+    <>
+      <IconButton
+        mr="20px"
+        variant="outline"
+        colorScheme="teal"
+        aria-label="delete"
+        icon={<DeleteIcon />}
+        onClick={onOpen}
+      />
 
       <AlertDialog
         isOpen={isOpen}
@@ -33,7 +42,7 @@ function DeleteInfo({ student }) {
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
               Delete Student
             </AlertDialogHeader>
 
@@ -45,7 +54,7 @@ function DeleteInfo({ student }) {
               <Button ref={cancelRef} onClick={onClose}>
                 Cancel
               </Button>
-              <Button colorScheme='red' onClick={ handleDeleteStudent } ml={3}>
+              <Button colorScheme="red" onClick={handleDeleteStudent} ml={3}>
                 Delete
               </Button>
             </AlertDialogFooter>
@@ -53,7 +62,7 @@ function DeleteInfo({ student }) {
         </AlertDialogOverlay>
       </AlertDialog>
     </>
-  )
+  );
 }
-  
-  export default DeleteInfo;
+
+export default DeleteInfo;
